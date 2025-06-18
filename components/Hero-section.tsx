@@ -19,7 +19,7 @@ const HeroSection = () => {
 
   return (
     <div>
-      <div className="bg-black" />
+      <div className="" />
     <div className="relative  h-[calc(80vh-2rem)] overflow-hidden">
       {isLoading && (
         <div className="absolute inset-0 bg-background animate-pulse" />

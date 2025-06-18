@@ -13,7 +13,7 @@ import {
 
 const Header = () => {
   return (
-    <div className="absolute left-0 right-0 z-20 flex items-center justify-between px-6 max-md:px-2 py-2 max-md:bg-gray-600 max-md:bg-gradient-to-r from-black/80  via-black/70 to-black/80 max-md:backdrop-blur-md max-md:shadow-lg">
+    <div className="absolute left-0 right-0 z-20 flex items-center justify-between px-6 max-md:px-2 py-2 max-md:bg-[#01293C] from-black/60  via-black/70 to-black/80 max-md:backdrop-blur-md max-md:shadow-lg">
       {/* Left side - empty for balance */}
       <div className="w-12">
       <Image src="/logo-sm.png" alt="logo" className="w-8 h-8 max-md:block hidden" width={100} height={100} />
