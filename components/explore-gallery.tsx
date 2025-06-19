@@ -15,7 +15,7 @@ const ExploreGallery = () => {
     <section className="max-w-[90rem] mx-auto bg-[#01293C] max-md:py-16 py-26 px-4 w-full">
       <div className="flex flex-col gap-4">
         {/* First row: 4 images */}
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex flex-wrap-reverse gap-4 justify-center">
           {images.slice(0, 4).map((src, idx) => (
             <div
               key={idx}
@@ -31,7 +31,7 @@ const ExploreGallery = () => {
           ))}
         </div>
         {/* Second row: 3 images, centered */}
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex flex-wrap-reverse gap-4 justify-center">
           {images.slice(4, 7).map((src, idx) => (
             <div
               key={idx}

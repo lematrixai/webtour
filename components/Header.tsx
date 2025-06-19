@@ -53,14 +53,18 @@ const Header = () => {
               <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("Home clicked")}>
                Home
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("About clicked")}>
-                  About
-              </DropdownMenuItem>
+        
               <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("Services clicked")}>
-                  Services
+                  Tour
+              </DropdownMenuItem>
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => console.log("Contact clicked")}>
+                  Experience
               </DropdownMenuItem>
               <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => console.log("Contact clicked")}>
                   Contact
+              </DropdownMenuItem>
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("About clicked")}>
+                  About
               </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
