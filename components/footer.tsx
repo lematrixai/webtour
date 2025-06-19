@@ -24,7 +24,7 @@ const Footer = () => {
           {/* About */}
           <div className="flex flex-col justify-center pb-8 md:pb-0 md:pr-12">
             <h3 className="text-2xl font-semibold mb-4 text-[#E1C5A0]">About</h3>
-            <p className="text-[#7A8A99] mb-8 max-w-md">
+            <p className="text-[#7A8A99] text-lg mb-8 max-w-md">
               Luxury Adventure Tours is dedicated to providing unparalleled luxury travel experiences. With a focus on minimalist yet extravagant adventures, we cater to the elite travelers seeking sophistication and exclusivity. Our commitment is to redefine luxury travel by offering unique and unforgettable journeys.
             </p>
             <form className="w-full max-w-xs">
