@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     <>
       <footer id="contact" className="bg-[#07384A] text-[#E1C5A0] py-12 px-4 md:px-12 w-full border-t border-[#2B5A6B]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-[#2B5A6B]">
+        <div className="max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-[#2B5A6B]">
           {/* About */}
           <div className="flex flex-col justify-center pb-8 md:pb-0 md:pr-12">
             <h3 className="text-2xl font-semibold mb-4 text-[#E1C5A0]">About</h3>
@@ -74,7 +74,7 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <div className='flex justify-center items-center text-white py-6 bg-[#0B3B4F]]'>
+      <div className='flex justify-center items-center dark:text-white text-black py-6 bg-[#0B3B4F]]'>
         <p>&copy; Copyright 2025 by Luxury Adventure Tours.</p>
       </div>
       {/* Back to Top Button */}

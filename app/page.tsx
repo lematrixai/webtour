@@ -14,12 +14,14 @@ export default function Home() {
     <HeroSection />
     <SearchBar />
     <TopDestinations />
-    <WhyBookWithUs />
+    <WhyBookWithUs /> 
     <TopTour />
     <BannerFlex />
     <ExploreGallery />
     <BannerCancel />
+    <div className='py-20 max-md:py-10'>
     <CTA />
+    </div>
     </div>
   );
 }

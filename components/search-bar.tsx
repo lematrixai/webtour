@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 const SearchBar = () => {
   return (
-    <div className="max-w-[90rem] px-2 sm:px-6 md:px-10 mx-auto py-4 bg-[#01293C]">
+    <div className="max-w-full px-2 sm:px-6 md:px-10 mx-auto py-4 bg-[#01293C]">
       <div className="flex flex-col sm:flex-row items-stretch w-full sm:w-11/12 md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto bg-white rounded-2xl sm:rounded-full shadow-lg border border-gray-200 overflow-hidden">
         {/* Where to section */}
         <div className="flex-1 px-4 py-3 sm:px-6 sm:py-6">

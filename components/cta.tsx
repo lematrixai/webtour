@@ -8,7 +8,7 @@ const CTA = () => {
   return (
     <section
       id="about"
-      className="relative w-full max-w-7xl mx-auto overflow-hidden bg-[#003A56] flex flex-col md:flex-row items-center justify-between px-4 md:px-10 py-30 md:py-26 my-12 shadow-xl bg-center bg-cover"
+      className="relative w-full max-w-[90rem] mx-auto  overflow-hidden bg-[#003A56] flex flex-col md:flex-row items-center justify-between px-4 md:px-10 py-30 md:py-26 shadow-xl bg-center bg-cover"
       style={{
         backgroundImage: `url('/cta-image.png')`,
         backgroundPosition: 'center',

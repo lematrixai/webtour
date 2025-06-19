@@ -55,7 +55,8 @@ const item = {
 
 const TopDestinations = () => {
   return (
-    <section className="bg-[#01293C] py-20  max-md:px-7 px-18 max-w-[90rem] mx-auto">
+    <section className="bg-[#01293C] py-20 max-w-full px-4 md:px-10 mx-auto">
+      <div className='max-w-[90rem] mx-auto'>
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 font-montserrat text-[#E1C5A0]">
         Top Destinations
       </h2>
@@ -98,6 +99,7 @@ const TopDestinations = () => {
           View More
         </motion.button>
       </div>
+    </div>
     </section>
   )
 }

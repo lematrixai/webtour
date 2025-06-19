@@ -19,7 +19,7 @@ const ExploreGallery = () => {
           {images.slice(0, 4).map((src, idx) => (
             <div
               key={idx}
-              className="aspect-square w-full md:w-1/4 max-w-[300px] auto flex-shrink-0 overflow-hidden px-4 md:px-0"
+              className="aspect-square w-full md:w-1/4 max-w-[300px] max-md:max-w-full flex-shrink-0 overflow-hidden px-4 md:px-0"
             >
               <img
                 src={src}
@@ -35,7 +35,7 @@ const ExploreGallery = () => {
           {images.slice(4, 7).map((src, idx) => (
             <div
               key={idx}
-              className="aspect-square w-full md:w-1/4 max-w-[300px] flex-shrink-0 overflow-hidden px-4 md:px-0"
+              className="aspect-square w-full md:w-1/4 max-md:max-w-full flex-shrink-0 overflow-hidden px-4 md:px-0"
             >
               <img
                 src={src}
