@@ -30,7 +30,7 @@ const destinations = [
   },
   {
     name: 'rock city',
-    image: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3fd9?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=600&q=80',
   },
   {
     name: 'hot spring',
@@ -55,7 +55,7 @@ const item = {
 
 const TopDestinations = () => {
   return (
-    <section className="bg-[#01293C] py-12  max-md:px-7 px-18 max-w-[90rem] mx-auto">
+    <section className="bg-[#01293C] py-20  max-md:px-7 px-18 max-w-[90rem] mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 font-montserrat text-[#E1C5A0]">
         Top Destinations
       </h2>
@@ -88,6 +88,16 @@ const TopDestinations = () => {
           </motion.div>
         ))}
       </motion.div>
+      
+      <div className="text-center mt-10">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-[#E1C5A0] text-[#01293C] px-8 py-3 rounded-full font-semibold font-montserrat hover:bg-[#D4B890] transition-colors duration-300 shadow-lg hover:shadow-xl"
+        >
+          View More
+        </motion.button>
+      </div>
     </section>
   )
 }
