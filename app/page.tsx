@@ -6,6 +6,7 @@ import TopTour from "@/components/top-tour";
 import BannerFlex from "@/components/banner-flex";
 import BannerCancel from "@/components/banner-cancel";
 import ExploreGallery from "@/components/explore-gallery";
+import CTA from "@/components/cta";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
     <BannerFlex />
     <ExploreGallery />
     <BannerCancel />
+    <CTA />
     </div>
   );
 }
