@@ -3,14 +3,13 @@ import { Afacad } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
-
+import PageTransition from "@/components/PageTransition";
 
 const afacad = Afacad({
   variable: "--font-afacad",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
-
 
 export const metadata: Metadata = {
   title: "Luxury adventure tour",
@@ -34,8 +33,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <Footer/>
+            <PageTransition>
+              {children}
+              <Footer/>
+            </PageTransition>
           </ThemeProvider>
       </body>
     </html>

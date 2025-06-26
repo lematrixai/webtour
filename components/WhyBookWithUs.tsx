@@ -1,8 +1,24 @@
 "use client"
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const WhyBookWithUs = () => (
+// Inline Skeleton component (in case the reusable one is not available)
+const Skeleton = ({ width = "100%", height = 20, rounded = "rounded-2xl", className = "" }) => (
+  <div
+    className={`bg-gray-300 dark:bg-gray-700 animate-pulse ${rounded} ${className}`}
+    style={{ width, height }}
+  />
+);
+
+const WhyBookWithUs = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 1200); // Simulate loading
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
   <section className="bg-[#E1C5A0] py-20 px-4 md:px-10 max-w-full w-full mx-auto overflow-x-hidden">
     <div className="flex flex-col lg:flex-row items-center gap-12 w-full max-w-7xl mx-auto">
       {/* Image */}
@@ -12,11 +28,15 @@ const WhyBookWithUs = () => (
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
       >
+          {loading ? (
+            <Skeleton height={400} className="w-full h-[250px] md:h-[400px]" />
+          ) : (
         <img 
           src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80"
           alt="Travel experience"
           className="rounded-2xl shadow-xl w-full h-[250px] md:h-[400px] object-cover"
         />
+          )}
       </motion.div>
 
       {/* Content */}
@@ -26,14 +46,25 @@ const WhyBookWithUs = () => (
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
+          {loading ? (
+            <>
+              <Skeleton height={40} width="60%" className="mb-4" />
+              <Skeleton height={28} width="90%" className="mb-3" />
+              <div className="space-y-3">
+                <Skeleton height={24} width="80%" className="mb-2" />
+                <Skeleton height={24} width="70%" className="mb-2" />
+                <Skeleton height={24} width="60%" className="mb-2" />
+              </div>
+              <Skeleton height={48} width="40%" className="mt-6" />
+            </>
+          ) : (
+            <>
         <h2 className="text-3xl md:text-4xl font-bold font-jost text-[#01293C]">
           Why Book With Us?
         </h2>
-        
         <p className="text-xl text-gray-600 leading-relaxed font-jost">
           Experience unforgettable adventures with our expert guides, personalized itineraries, and exclusive access to Tanzania's most stunning destinations.
         </p>
-
         <div className="space-y-3">
           <div className="flex items-center ">
             <div className="w-2 h-2 bg-[#E1C5A0] rounded-full"></div>
@@ -48,7 +79,6 @@ const WhyBookWithUs = () => (
             <span className="font-medium text-[#01293C] text-xl">Authentic cultural experiences</span>
           </div>
         </div>
-
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -56,9 +86,12 @@ const WhyBookWithUs = () => (
         >
           Start Your Journey
         </motion.button>
+            </>
+          )}
       </motion.div>
     </div>
   </section>
 )
+}
 
 export default WhyBookWithUs 
