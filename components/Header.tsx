@@ -10,9 +10,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link as ScrollLink } from 'react-scroll';
 import { scroller } from 'react-scroll';
 import { useEffect, useState } from 'react';
+import Link from "next/link";
 
 const scrollToSection = (id: string) => {
   scroller.scrollTo(id, {
@@ -80,11 +80,13 @@ const Header = () => {
               <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => scrollToSection('top-destinations')}>
                 Tour
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => scrollToSection('why-book')}>
+                <a href="/experience">
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" >
                 Experience
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => console.log("Contact clicked")}>Contact</DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("About clicked")}>About</DropdownMenuItem>
+                </a>
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() =>scrollToSection('footer')}>Contact</DropdownMenuItem>
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => scrollToSection('why-book')}>About</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
       </motion.div>
