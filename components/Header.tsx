@@ -10,10 +10,34 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Link as ScrollLink } from 'react-scroll';
+import { scroller } from 'react-scroll';
+import { useEffect, useState } from 'react';
+
+const scrollToSection = (id: string) => {
+  scroller.scrollTo(id, {
+    smooth: true,
+    duration: 600,
+    offset: -80, // adjust for header height
+  });
+};
 
 const Header = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="absolute left-0 right-0 z-20 flex items-center justify-between px-6 max-md:px-2 py-2 max-md:bg-[#01293C] from-black/60  via-black/70 to-black/80 max-md:backdrop-blur-md max-md:shadow-lg">
+    <div
+      className={`fixed top-0 left-0 right-0 w-full z-50 flex items-center justify-between px-6 max-md:px-2 py-2 transition-all duration-300
+        ${scrolled ? 'bg-white/10 backdrop-blur-md' : 'bg-transparent'}`}
+    >
       {/* Left side - empty for balance */}
       <div className="w-12">
       <Image src="/logo-sm.png" alt="logo" className="w-8 h-8 max-md:block hidden" width={100} height={100} />
@@ -50,22 +74,17 @@ const Header = () => {
               </DropdownMenuTrigger>
             </div>
             <DropdownMenuContent className="bg-white/95 hover:bg-[#E1C5A0] backdrop-blur-md border border-white/20 shadow-2xl rounded-xl lg:mt-3 xl:mt-3 min-w-[150px] lg:min-w-[200px] " align="end">
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("Home clicked")}>
-               Home
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => scrollToSection('below-hero')}>
+                Home
               </DropdownMenuItem>
-        
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("Services clicked")}>
-                  Tour
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => scrollToSection('top-destinations')}>
+                Tour
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => console.log("Contact clicked")}>
-                  Experience
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => scrollToSection('why-book')}>
+                Experience
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => console.log("Contact clicked")}>
-                  Contact
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("About clicked")}>
-                  About
-              </DropdownMenuItem>
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() => console.log("Contact clicked")}>Contact</DropdownMenuItem>
+              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => console.log("About clicked")}>About</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
       </motion.div>

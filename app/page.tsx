@@ -15,87 +15,84 @@ export default function Home() {
   return (
     <div className="bg-[#003A56]">
       <HeroSection />
-      <div className="flex justify-center py-4">
-        <ScrollLink to="below-hero" smooth={true} duration={600} offset={-20}>
-          <button className="bg-[#E1C5A0] text-[#003A56] rounded-full px-6 py-2 font-bold shadow-lg hover:bg-[#ffe6b0] transition-colors">
-            Scroll Down
-          </button>
-        </ScrollLink>
-      </div>
+     
       <div className="bg-[#01293C]" id="below-hero">
         <SearchBar />
       </div>
       <div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <TopDestinations />
-      </motion.div>
-      </div>
-<div>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <WhyBookWithUs />
-      </motion.div>
-      </div>
-<div>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <TopTour />
-      </motion.div>
+        <div className="bg-[#01293C]" id="top-destinations">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <TopDestinations />
+          </motion.div>
+        </div>
       </div>
       <div>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <BannerFlex />
-      </motion.div>
+        <div id="why-book">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <WhyBookWithUs />
+          </motion.div>
+        </div>
       </div>
       <div>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <ExploreGallery />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <TopTour />
+        </motion.div>
       </div>
       <div>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <BannerCancel />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <BannerFlex />
+        </motion.div>
       </div>
       <div>
-      <motion.div
-        className='py-20 max-md:py-10'
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <CTA />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <ExploreGallery />
+        </motion.div>
+      </div>
+      <div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <BannerCancel />
+        </motion.div>
+      </div>
+      <div>
+        <motion.div
+          className='py-20 max-md:py-10'
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <CTA />
+        </motion.div>
       </div>
     </div>
   );
