@@ -1,3 +1,4 @@
+"use client";
 import HeroSection from "@/components/Hero-section";
 import SearchBar from "@/components/search-bar";
 import TopDestinations from "@/components/Top-destinations";
@@ -7,12 +8,20 @@ import BannerFlex from "@/components/banner-flex";
 import BannerCancel from "@/components/banner-cancel";
 import ExploreGallery from "@/components/explore-gallery";
 import CTA from "@/components/cta";
-import motion from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 
 export default function Home() {
   return (
     <div className="bg-[#003A56]">
       <HeroSection />
+      <div className="flex justify-center py-4">
+        <ScrollLink to="below-hero" smooth={true} duration={600} offset={-20}>
+          <button className="bg-[#E1C5A0] text-[#003A56] rounded-full px-6 py-2 font-bold shadow-lg hover:bg-[#ffe6b0] transition-colors">
+            Scroll Down
+          </button>
+        </ScrollLink>
+      </div>
       <div className="bg-[#01293C]" id="below-hero">
         <SearchBar />
       </div>
