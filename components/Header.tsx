@@ -13,85 +13,201 @@ import {
 import { scroller } from 'react-scroll';
 import { useEffect, useState } from 'react';
 import Link from "next/link";
+import { label } from "framer-motion/client";
 
 const scrollToSection = (id: string) => {
   scroller.scrollTo(id, {
     smooth: true,
     duration: 600,
-    offset: -80, // adjust for header height
+    offset: -20,
   });
 };
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
+  const navItems = [
+    { label: 'Home', action: () => scrollToSection('below-hero') },
+    { label: 'Tour', href: '/tours' },
+    { label: 'Services', href: '/services' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '/about' },
+    { label: 'Book Now', href: '/tours' },
+  ];
+
   return (
-    <div
-      className={`fixed top-0 left-0 right-0 w-full z-50 flex items-center justify-between px-6 max-md:px-2 py-2 transition-all duration-300
-        ${scrolled ? 'bg-white/10 backdrop-blur-md' : 'bg-transparent'}`}
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ease-out
+        ${scrolled 
+          ? 'bg-white/80 dark:bg-[#18130C]/90 backdrop-blur-xl border-b border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 shadow-2xl' 
+          : 'bg-transparent'
+        }`}
     >
-      {/* Left side - empty for balance */}
-      <div className="w-12">
-      <Image src="/logo-sm.png" alt="logo" className="w-8 h-8 max-md:block hidden" width={100} height={100} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-20">
+          {/* Three-column layout for centering logo */}
+          <div className="flex flex-1 items-center justify-start min-w-0">
+            {/* Desktop Navigation (left) */}
+            {scrolled && !isMobile && (
+              <motion.nav 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, staggerChildren: 0.1 }}
+                className="hidden lg:flex items-center space-x-1"
+              >
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="relative group"
+                  >
+                    {item.href ? (
+                      <Link href={item.href}>
+                        <span className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0] transition-all duration-300 cursor-pointer group">
+                          {item.label}
+                          <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        </span>
+                      </Link>
+                    ) : (
+                      <button 
+                        onClick={item.action}
+                        className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0] transition-all duration-300 cursor-pointer group"
+                      >
+                        {item.label}
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                      </button>
+                    )}
+                    <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/60 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                  </motion.div>
+                ))}
+              </motion.nav>
+            )}
+          </div>
 
-      </div>
-      
-      {/* Center - Logo */}
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="flex items-center py-4"
-      >
-        <Image src="/logo.png" alt="logo" className="w-[239.72px] h-[84px] max-md:hidden" width={100} height={100} />
-      </motion.div>
-      
-      {/* Right side - Enhanced Menu icon */}
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="flex items-center justify-center gap-2"
-      >
-        <DropdownMenu>
-            <div className="flex items-center rounded-xl lg:border xl:border bg-gradient-to-b max-md:bg-none from-white/20 to-transparent lg:backdrop-blur-md xl:backdrop-blur-md shadow-2xl hover:bg-white/20 transition-all duration-300">
-              <div>
-                <ModeToggle />
-              </div>
-              {/* Enhanced separator line */}
-              {/* Enhanced menu icon */}
-              <DropdownMenuTrigger className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 outline-none focus-visible:ring-ring/50 focus-visible:ring-[3px] hover:bg-white/20 size-10 lg:size-11 xl:size-12 rounded-r-xl">
-                <CiMenuBurger className=" max-md:size-5 size-8 text-white hover:text-gray-200 text-xl lg:text-2xl xl:text-2xl transition-all duration-300 " />
-                <span className="sr-only">Toggle menu</span>
-              </DropdownMenuTrigger>
+          {/* Centered Logo */}
+          <motion.div 
+            initial={{ opacity: 0, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex-shrink-0 flex  absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0 lg:relative"
+            style={{ zIndex: 10 }}
+          >
+            <div className="relative">
+              <Image 
+                src="/logo.png" 
+                alt="logo" 
+                className="w-32 lg:w-40 h-auto items-center justify-center max-md:hidden transition-transform duration-300 hover:scale-105" 
+                width={160} 
+                height={56} 
+              />
+              <Image 
+                src="/logo.png" 
+                alt="logo" 
+                className="w-30 h-10 text-start max-md:block left-3/4 hidden transition-transform duration-300 hover:scale-110" 
+                width={80} 
+                height={80} 
+              />
             </div>
-            <DropdownMenuContent className="bg-white/95 hover:bg-[#E1C5A0] backdrop-blur-md border border-white/20 shadow-2xl rounded-xl lg:mt-3 xl:mt-3 min-w-[150px] lg:min-w-[200px] " align="end">
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => scrollToSection('below-hero')}>
-                Home
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => scrollToSection('top-destinations')}>
-                Tour
-              </DropdownMenuItem>
-                <a href="/experience">
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" >
-                Experience
-              </DropdownMenuItem>
-                </a>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg text-base lg:text-lg font-medium transition-all duration-300 cursor-pointer" onClick={() =>scrollToSection('footer')}>Contact</DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-800 hover:text-black hover:bg-gray-100/80 rounded-lg  text-base lg:text-lg font-medium transition-all duration-300  cursor-pointer" onClick={() => scrollToSection('why-book')}>About</DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-      </motion.div>
-    </div>
-  )
-}
+          </motion.div>
 
-export default Header
+          {/* Right Side Controls */}
+          <div className="flex flex-1 items-center justify-end min-w-0">
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative group flex items-center bg-white/10 dark:bg-[#E1C5A0]/10 backdrop-blur-md border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/40 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hidden md:flex"
+            >
+              {/* Mode Toggle - left */}
+              <div className="flex items-center px-1.5 py-1">
+                <ModeToggle scrolled={scrolled} />
+              </div>
+              {/* Divider */}
+              <div className="w-px h-6 bg-[#E1C5A0]/40 dark:bg-[#E1C5A0]/60 mx-1" />
+              {/* Mobile Menu - right */}
+              {(!scrolled || isMobile) && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex items-center px-1.5 py-1 focus:outline-none focus:ring-2 focus:ring-[#E1C5A0]/50">
+                    <CiMenuBurger className="w-5 h-5 text-[#18130C] dark:text-white transition-colors duration-300" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent 
+                    className="bg-white/95 dark:bg-[#18130C]/95 backdrop-blur-xl border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/40 shadow-2xl rounded-2xl p-2 min-w-[200px] mt-2"
+                    align="end"
+                  >
+                    {navItems.map((item, index) => (
+                      <DropdownMenuItem 
+                        key={item.label}
+                        className="text-[#18130C] dark:text-white hover:text-[#E1C5A0] dark:hover:text-[#E1C5A0] hover:bg-gradient-to-r hover:from-[#E1C5A0]/10 hover:to-[#E1C5A0]/20 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer p-3"
+                        onClick={item.action}
+                      >
+                        {item.label}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            </motion.div>
+            
+            {/* Mobile-only menu (without theme toggle) */}
+            {(!scrolled || isMobile) && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                className="relative group md:hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="relative bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-gray-700/50 rounded-xl p-3 shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                    <CiMenuBurger className="w-5 h-5 lg:w-6 lg:h-6 text-gray-700 dark:text-gray-200 transition-colors duration-300" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent 
+                    className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/50 shadow-2xl rounded-2xl p-2 min-w-[200px] mt-2"
+                    align="end"
+                  >
+                    {navItems.map((item, index) => (
+                      <DropdownMenuItem 
+                        key={item.label}
+                        className="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer p-3"
+                        onClick={item.action}
+                      >
+                        {item.label}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.header>
+  );
+};
+
+export default Header;

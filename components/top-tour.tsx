@@ -123,7 +123,7 @@ const TopTours = () => {
           whileInView="show"
           viewport={{ once: true }}
         >
-          <Carousel className="w-full " setApi={setEmblaApi} opts={{ loop: true, slidesToScroll: 1 }}>
+          <Carousel className="w-full mx-" setApi={setEmblaApi} opts={{ loop: true, slidesToScroll: 1 }}>
             <CarouselContent className="w-full">
               {loading
                 ? Array.from({ length: skeletonCount }).map((_, idx) => (
@@ -218,8 +218,8 @@ const TopTours = () => {
                     </CarouselItem>
                   ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            {/* <CarouselPrevious />
+            <CarouselNext /> */}
           </Carousel>
         </motion.div>
       </div>

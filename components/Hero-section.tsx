@@ -63,27 +63,81 @@ const HeroSection = () => {
             </h1>
           </motion.div>
         </div>
-        {/* Animated scroll-down button */}
-        <motion.button
-          aria-label="Scroll down to explore"
+
+        {/* Modern minimalist scroll indicator */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="absolute left-1/2 bottom-10 z-20 -translate-x-1/2 bg-[#E1C5A0] text-[#003A56] rounded-full p-3 shadow-lg hover:bg-[#ffe6b0] focus:outline-none focus:ring-4 focus:ring-[#E1C5A0]/40 animate-bounce"
-          onClick={() => {
-            const el = document.getElementById('below-hero');
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
+          className="absolute left-1/2 bottom-12 z-20 -translate-x-1/2"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </motion.button>
+          <motion.button
+            aria-label="Scroll down to explore"
+            onClick={() => {
+              const el = document.getElementById('below-hero');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="group relative flex flex-col items-center gap-4 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {/* Animated dots */}
+            <div className="flex flex-col items-center gap-2">
+              {[0, 1, 2].map((index) => (
+                <motion.div
+                  key={index}
+                  className="w-1.5 h-1.5 rounded-full bg-white/60 group-hover:bg-[#E1C5A0] transition-colors duration-300"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.6, 1, 0.6],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: index * 0.2,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
+            
+            {/* Animated line */}
+            <motion.div
+              className="w-px h-12 bg-gradient-to-b from-white/40 to-white/80 group-hover:from-[#E1C5A0]/40 group-hover:to-[#E1C5A0]/80 transition-all duration-300"
+              animate={{
+                height: [48, 56, 48],
+                opacity: [0.6, 1, 0.6],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            
+            {/* Scroll text */}
+            <motion.div
+              className="text-center"
+              animate={{
+                y: [0, -4, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <span className="text-xs font-light tracking-[0.3em] text-white/70 group-hover:text-[#E1C5A0] transition-colors duration-300 uppercase">
+                Explore
+              </span>
+            </motion.div>
+          </motion.button>
+        </motion.div>
       </div>
     </div>
   );
-}
+};
 
 export default HeroSection;
