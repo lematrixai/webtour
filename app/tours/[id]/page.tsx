@@ -127,30 +127,30 @@ The tour includes luxury accommodations with caldera views, all transportation, 
       id: 1,
       name: "Sarah Johnson",
       rating: 5,
-      date: "2024-01-15",
+      date: "2025-01-15",
       comment: "Absolutely incredible experience! The views were breathtaking and our guide was amazing. Highly recommend!"
     },
     {
       id: 2,
       name: "Michael Chen",
       rating: 5,
-      date: "2024-01-10",
+      date: "2025-01-10",
       comment: "Perfect blend of relaxation and adventure. The wine tasting was a highlight!"
     },
     {
       id: 3,
       name: "Emma Davis",
       rating: 4,
-      date: "2024-01-05",
+      date: "2025-01-05",
       comment: "Beautiful tour with great accommodations. Only wish it was longer!"
     }
   ],
   availability: [
-    { date: "2024-03-15", available: true },
-    { date: "2024-03-22", available: true },
-    { date: "2024-03-29", available: false },
-    { date: "2024-04-05", available: true },
-    { date: "2024-04-12", available: true }
+    { date: "2025-03-15", available: true },
+    { date: "2025-03-22", available: true },
+    { date: "2025-03-29", available: false },
+    { date: "2025-04-05", available: true },
+    { date: "2025-04-12", available: true }
   ]
 };
 
@@ -485,6 +485,18 @@ const TourDetail = ({ params }: { params: { id: string } }) => {
                         +
                       </Button>
                     </div>
+                  </div>
+
+                  {/* Email Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-[#E1C5A0] mb-2">
+                      Email Address
+                    </label>
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full h-10 px-3 bg-white/10 dark:bg-[#18130C]/50 border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 rounded-md focus:border-[#E1C5A0] focus:outline-none text-[#E1C5A0] placeholder:text-[#E1C5A0]/60"
+                    />
                   </div>
 
                   {/* Price Breakdown */}

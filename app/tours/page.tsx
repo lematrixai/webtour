@@ -220,7 +220,7 @@ const Tours = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#18130C] via-[#18130C] to-[#18130C]/90">
+    <div className="min-h-screen pb-8 bg-gradient-to-br from-[#18130C] via-[#18130C] to-[#18130C]/90">
       {/* Hero Section */}
       <div className="relative h-[60vh] bg-gradient-to-r from-[#E1C5A0]/10 via-[#E1C5A0]/5 to-[#E1C5A0]/10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#18130C]/80" />
@@ -411,20 +411,6 @@ const Tours = () => {
                   >
                     <Heart className="w-4 h-4" />
                   </Button>
-                  
-                  {/* Price */}
-                  <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                    <div className="text-right">
-                      <div className="text-lg font-bold text-[#18130C]">
-                        ${tour.price}
-                      </div>
-                      {tour.originalPrice > tour.price && (
-                        <div className="text-sm text-gray-600 line-through">
-                          ${tour.originalPrice}
-                        </div>
-                      )}
-                    </div>
-                  </div>
                 </div>
 
                 <CardHeader className="pb-3">
