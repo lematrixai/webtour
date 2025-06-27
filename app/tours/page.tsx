@@ -9,7 +9,6 @@ import {
   Search, 
   Filter, 
   MapPin, 
-  Calendar, 
   Star, 
   Clock, 
   Users,
@@ -225,7 +224,7 @@ const Tours = () => {
       {/* Hero Section */}
       <div className="relative h-[60vh] bg-gradient-to-r from-[#E1C5A0]/10 via-[#E1C5A0]/5 to-[#E1C5A0]/10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#18130C]/80" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1612374374234-3190c40b892d?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] opacity-30" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1612374374234-3190c40b892d?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center opacity-30" />
         
         <div className="relative z-10 flex items-center justify-center h-full">
           <motion.div
