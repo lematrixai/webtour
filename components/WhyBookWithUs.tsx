@@ -19,7 +19,7 @@ const WhyBookWithUs = () => {
   }, []);
 
   return (
-  <section className="bg-[#E1C5A0] py-20 px-4 md:px-10 max-w-full w-full mx-auto overflow-x-hidden">
+  <section id="about" className="bg-[#E1C5A0] py-20 px-4 md:px-10 max-w-full w-full mx-auto overflow-x-hidden">
     <div className="flex flex-col lg:flex-row items-center gap-12 w-full max-w-7xl mx-auto">
       {/* Image */}
       <motion.div 

@@ -50,9 +50,9 @@ const Header = () => {
     { label: 'Home', action: () => scrollToSection('below-hero') },
     { label: 'Tour', href: '/tours' },
     { label: 'Services', href: '/services' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'About', href: '/about' },
-    { label: 'Book Now', href: '/tours' },
+    { label: 'Contact', action: () => scrollToSection('footer') },
+    { label: 'About', action: () => scrollToSection('about') },
+    { label: 'Book Now', href: '/book-now', isButton: true },
   ];
 
   return (
@@ -89,21 +89,35 @@ const Header = () => {
                   >
                     {item.href ? (
                       <Link href={item.href}>
-                        <span className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0] transition-all duration-300 cursor-pointer group">
+                        <span className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer group ${
+                          item.isButton 
+                            ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-lg shadow-md hover:shadow-lg hover:scale-105' 
+                            : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                        }`}>
                           {item.label}
-                          <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                          {!item.isButton && (
+                            <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                          )}
                         </span>
                       </Link>
                     ) : (
                       <button 
                         onClick={item.action}
-                        className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0] transition-all duration-300 cursor-pointer group"
+                        className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer group ${
+                          item.isButton 
+                            ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-lg shadow-md hover:shadow-lg hover:scale-105' 
+                            : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                        }`}
                       >
                         {item.label}
-                        <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        {!item.isButton && (
+                          <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        )}
                       </button>
                     )}
-                    <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/60 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    {!item.isButton && (
+                      <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/60 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    )}
                   </motion.div>
                 ))}
               </motion.nav>
@@ -162,7 +176,11 @@ const Header = () => {
                     {navItems.map((item, index) => (
                       <DropdownMenuItem 
                         key={item.label}
-                        className="text-[#18130C] dark:text-white hover:text-[#E1C5A0] dark:hover:text-[#E1C5A0] hover:bg-gradient-to-r hover:from-[#E1C5A0]/10 hover:to-[#E1C5A0]/20 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer p-3"
+                        className={`text-sm font-medium transition-all duration-300 cursor-pointer p-3 ${
+                          item.isButton 
+                            ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-xl shadow-md hover:shadow-lg' 
+                            : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 rounded-xl'
+                        }`}
                         onClick={item.action}
                       >
                         {item.label}
@@ -193,7 +211,11 @@ const Header = () => {
                     {navItems.map((item, index) => (
                       <DropdownMenuItem 
                         key={item.label}
-                        className="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer p-3"
+                        className={`text-sm font-medium transition-all duration-300 cursor-pointer p-3 ${
+                          item.isButton 
+                            ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-xl shadow-md hover:shadow-lg' 
+                            : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 rounded-xl'
+                        }`}
                         onClick={item.action}
                       >
                         {item.label}

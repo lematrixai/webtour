@@ -98,7 +98,7 @@ const ModernSearchInput = ({
           className={`absolute pointer-events-none transition-all duration-300 text-sm font-medium py-2
             ${isFocused || value 
               ? `text-[#E1C5A0] -top-4 bg-white/90 dark:bg-gray-900/90 px-2 rounded-md text-xs ${Icon ? 'left-12' : 'left-4'}` 
-              : `text-gray-500 dark:text-gray-400 top-2 ${Icon ? 'left-12' : 'left-4'}`
+              : `text-gray-500 dark:text-gray-400 top-[0.05px] ${Icon ? 'left-12' : 'left-4'}`
             }
           `}
         >
@@ -158,7 +158,7 @@ const SearchBar = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6"
             >
               {/* Where */}
               <ModernSearchInput
