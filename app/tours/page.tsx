@@ -384,7 +384,7 @@ const Tours = () => {
         >
           {filteredTours.map((tour) => (
             <motion.div key={tour.id} variants={itemVariants}>
-              <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 bg-white/10 dark:bg-[#18130C]/50 backdrop-blur-sm overflow-hidden">
+              <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 py-0 pb-6 border-[#E1C5A0]/20  dark:border-[#E1C5A0]/30 bg-white/10 dark:bg-[#18130C]/50 backdrop-blur-sm overflow-hidden">
                 <div className="relative">
                   <div className="aspect-[4/3] overflow-hidden">
                     <Image
@@ -413,7 +413,7 @@ const Tours = () => {
                   </Button>
                 </div>
 
-                <CardHeader className="pb-3">
+                <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <CardTitle className="text-lg font-semibold text-white group-hover:text-[#E1C5A0] transition-colors">
@@ -428,7 +428,7 @@ const Tours = () => {
                 </CardHeader>
 
                 <CardContent className="pt-0">
-                  <p className="text-sm text-[#E1C5A0]/70 mb-4 line-clamp-2">
+                  <p className="text-sm text-[#E1C5A0]/70  line-clamp-2">
                     {tour.description}
                   </p>
                   

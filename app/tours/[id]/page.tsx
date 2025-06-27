@@ -488,7 +488,7 @@ const TourDetail = ({ params }: { params: { id: string } }) => {
                   </div>
 
                   {/* Email Field */}
-                  <div>
+    <div>
                     <label className="block text-sm font-medium text-[#E1C5A0] mb-2">
                       Email Address
                     </label>
