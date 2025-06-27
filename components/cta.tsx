@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const safariImg =
   'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80' // Unsplash safari landscape
@@ -24,12 +25,12 @@ const CTA = () => {
         <p className="text-lg md:text-2xl font-medium mb-8 drop-shadow-md">
           Book your next adventure with up to <span className="text-[#E1C5A0] font-bold">50% off</span>!
         </p>
-        <a
-          href="#"
+        <Link
+          href="/book-now"
           className="inline-block bg-[#E1C5A0] text-[#003A56] font-semibold text-lg px-8 py-3 rounded-full shadow-lg hover:bg-[#f5e2c7] transition-colors duration-200"
         >
           Book Now
-        </a>
+        </Link>
       </div>
 
       {/* Right: Safari Image with Offer Badge */}

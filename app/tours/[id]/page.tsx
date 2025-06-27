@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 // Mock tour data (in a real app, this would come from an API)
 const tourData = {
@@ -154,7 +155,9 @@ The tour includes luxury accommodations with caldera views, all transportation, 
   ]
 };
 
-const TourDetail = ({ params }: { params: { id: string } }) => {
+const TourDetail = () => {
+  const params = useParams();
+  const id = params?.id;
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedDate, setSelectedDate] = useState('');
   const [guests, setGuests] = useState(1);
@@ -522,9 +525,11 @@ const TourDetail = ({ params }: { params: { id: string } }) => {
                   </div>
 
                   {/* Book Button */}
-                  <Button className="w-full h-12 text-lg font-semibold bg-[#E1C5A0] text-[#18130C] hover:bg-[#E1C5A0]/90">
-                    Book Now
-                  </Button>
+                  <Link href={`/book-now?tourId=${id}`}>
+                    <Button className="w-full h-12 text-lg font-semibold bg-[#E1C5A0] text-[#18130C] hover:bg-[#E1C5A0]/90">
+                      Book Now
+                    </Button>
+                  </Link>
 
                   {/* Contact Info */}
                   <div className="text-center text-sm text-[#E1C5A0]/80">
