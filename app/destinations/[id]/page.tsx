@@ -106,28 +106,28 @@ const destinationData = {
   videos: [
     {
       id: 1,
-      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/sw6efwh8g7ddydtjksfo",
       thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/beach-castle",
       title: "Zanzibar Beach Paradise",
       description: "Pristine white sand beaches and turquoise waters"
     },
     {
       id: 2,
-      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/sw6efwh8g7ddydtjksfo",
       thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/architecture-signs",
       title: "Stone Town Heritage",
       description: "Historic architecture and cultural landmarks"
     },
     {
       id: 3,
-      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/sw6efwh8g7ddydtjksfo",
       thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains",
       title: "Spice Island Experience",
       description: "Aromatic spice plantations and traditional farming"
     },
     {
       id: 4,
-      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/sw6efwh8g7ddydtjksfo",
       thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/beach-castle",
       title: "Crystal Clear Waters",
       description: "Snorkeling and marine life exploration"
