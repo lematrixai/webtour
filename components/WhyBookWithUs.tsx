@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link';
 
 // Inline Skeleton component (in case the reusable one is not available)
 const Skeleton = ({ width = "100%", height = 20, rounded = "rounded-2xl", className = "" }) => (
@@ -84,7 +85,9 @@ const WhyBookWithUs = () => {
           whileTap={{ scale: 0.95 }}
           className="bg-[#01293C] text-white text-xl px-8 py-3 rounded-full font-semibold font-jost  hover:bg-[#1a3a4a] transition-colors duration-300 shadow-lg hover:shadow-xl"
         >
+          <Link href="/book-now">
           Start Your Journey
+          </Link>
         </motion.button>
             </>
           )}

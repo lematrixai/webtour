@@ -54,7 +54,7 @@ const Header = () => {
     action?: () => void;
     isButton?: boolean;
   }> = [
-    { label: 'Home', action: () => scrollToSection('below-hero') },
+    { label: 'Home', href: '/' },
     { label: 'Tour', href: '/tours' },
     { label: 'Destinations', href: '/destinations' },
     { label: 'Services', href: '/services' },

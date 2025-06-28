@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Afacad } from "next/font/google";
+import { Afacad, Ephesis } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
@@ -11,6 +11,13 @@ const afacad = Afacad({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
+
+const ephesis = Ephesis({
+  variable: "--font-ephesis",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 
 export const metadata: Metadata = {
   title: "Luxury adventure tour",
@@ -26,7 +33,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={` ${afacad.variable} font-afacad antialiased`}
+        className={`${afacad.variable} ${ephesis.variable} font-afacad antialiased`}
       >
           <ThemeProvider
             attribute="class"

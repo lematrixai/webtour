@@ -123,4 +123,7 @@
     font-family: var(--font-afacad);
   }
  
+  .text-ephesis {
+    font-family: var(--font-ephesis);
+  }
 }
