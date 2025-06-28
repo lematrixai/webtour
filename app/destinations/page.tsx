@@ -224,8 +224,27 @@ const Destinations = () => {
       {/* Hero Section */}
       <div className="relative h-[60vh] bg-gradient-to-r from-[#E1C5A0]/10 via-[#E1C5A0]/5 to-[#E1C5A0]/10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#18130C]/80" />
-        {/* <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1612374374234-3190c40b892d?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center opacity-30" /> */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2028&auto=format&fit=crop')] bg-cover bg-center opacity-30" />
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            src="https://player.cloudinary.com/embed/?cloud_name=dj7odelpw&public_id=vj5g6cd98hcuw7vz3osa&profile=cld-default&autoplay=1&muted=1&loop=1&controls=0"
+            width="640"
+            height="360"
+            style={{
+              height: 'auto',
+              width: '100%',
+              aspectRatio: '640 / 360',
+              opacity: 0.3,
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0
+            }}
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowFullScreen
+            frameBorder="0"
+          ></iframe>
+        </div>
         
         <div className="relative z-10 flex items-center justify-center h-full">
           <motion.div
