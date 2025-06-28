@@ -105,8 +105,66 @@ const TopTours = () => {
   const skeletonCount = 3;
 
   return (
-    <section className="bg-[#01405A] py-36 px-4 md:px-10 max-w-full w-full mx-auto overflow-x-hidden">
-      <div className="max-w-[90rem] mx-auto">     
+    <section className="relative py-36 px-4 md:px-10 max-w-full w-full mx-auto overflow-x-hidden">
+      {/* Fixed Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-fixed bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=2000&q=80')`,
+        }}
+      />
+      
+      {/* Overlay with gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#01293C]/90 via-[#01405A]/85 to-[#07384A]/80" />
+      
+      {/* Creative Tourism Patterns */}
+      <div className="absolute inset-0">
+        {/* Top Section - Compass and Navigation */}
+        <div className="absolute top-8 right-8 w-20 h-20 opacity-20">
+          <div className="w-full h-full border-2 border-[#E1C5A0] rounded-full animate-spin" style={{ animationDuration: '25s' }} />
+          <div className="absolute inset-2 border border-[#E1C5A0] rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
+        </div>
+        
+        {/* Top Left - World Map */}
+        <div className="absolute top-16 left-8 w-24 h-24 opacity-15">
+          <div className="w-full h-full border border-[#E1C5A0] rounded-full animate-pulse" />
+          <div className="absolute top-1/3 left-1/3 w-1.5 h-1.5 bg-[#E1C5A0] rounded-full animate-bounce" style={{ animationDelay: '0.5s' }} />
+          <div className="absolute bottom-1/3 right-1/3 w-1.5 h-1.5 bg-[#E1C5A0] rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
+        </div>
+        
+        {/* Center Left - Travel Route */}
+        <div className="absolute top-1/3 left-12 w-32 h-16 opacity-20">
+          <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-[#E1C5A0] to-transparent animate-pulse" />
+          <div className="absolute top-2 left-1/4 w-0.5 h-12 bg-gradient-to-b from-[#E1C5A0] to-transparent animate-pulse" style={{ animationDelay: '0.3s' }} />
+          <div className="absolute top-4 right-1/4 w-0.5 h-8 bg-gradient-to-b from-[#E1C5A0] to-transparent animate-pulse" style={{ animationDelay: '0.6s' }} />
+        </div>
+        
+        {/* Center Right - Adventure Path */}
+        <div className="absolute top-1/2 right-16 w-28 h-28 opacity-15">
+          <div className="w-full h-full border border-[#E1C5A0] rounded-full animate-spin" style={{ animationDuration: '20s' }} />
+          <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-[#E1C5A0] rounded-full animate-ping" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-[#E1C5A0] rounded-full animate-ping" style={{ animationDelay: '2s' }} />
+        </div>
+        
+      
+        
+     
+        
+        {/* Center Top - Geometric Element */}
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-16 h-16 opacity-10">
+          <div className="w-full h-full border border-[#E1C5A0] rotate-45 animate-pulse" />
+          <div className="absolute inset-2 border border-[#E1C5A0] -rotate-45 animate-pulse" style={{ animationDelay: '0.5s' }} />
+        </div>
+        
+        {/* Center Bottom - Travel Icon */}
+        <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 w-12 h-12 opacity-20">
+          <div className="w-full h-full border-2 border-[#E1C5A0] rounded-full animate-bounce" style={{ animationDuration: '3s' }} />
+          <div className="absolute inset-1 border border-[#E1C5A0] rounded-full animate-bounce" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }} />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-[90rem] mx-auto">     
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +187,7 @@ const TopTours = () => {
                 ? Array.from({ length: skeletonCount }).map((_, idx) => (
                     <CarouselItem key={"skeleton-" + idx} className="basis-full sm:basis-1/2 lg:basis-1/3 w-full">
                       <div className="p-1 w-full">
-                        <Card className="bg-[#08405A] rounded-2xl shadow-lg border-0 h-[35rem] flex flex-col group w-full relative overflow-hidden">
+                        <Card className="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-[#E1C5A0]/20 h-[35rem] flex flex-col group w-full relative overflow-hidden">
                           <div className="relative mb-4 w-full overflow-hidden rounded-xl">
                             <Skeleton height={232} className="w-full h-58" />
                           </div>
@@ -153,7 +211,7 @@ const TopTours = () => {
                         }}
                         transition={{ duration: 0.3 }}
                       >
-                        <Card className="bg-[#08405A] rounded-2xl shadow-lg border-0 h-[35rem] flex flex-col 
+                        <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-[#E1C5A0]/20 h-[35rem] flex flex-col 
                           transition-all duration-300 hover:shadow-2xl group w-full relative overflow-hidden">
                           <motion.div 
                             className="relative mb-4 w-full overflow-hidden rounded-xl"
@@ -184,7 +242,7 @@ const TopTours = () => {
                           </motion.div>
                           <CardContent className="flex flex-col flex-1 px-0 pb-0 w-full">
                             <motion.div 
-                              className="flex items-center gap-2 text-[#7FB2C2] text-base mb-1 px-4 
+                              className="flex items-center gap-2 text-[#E1C5A0] text-base mb-1 px-4 
                               transition-all duration-300 group-hover:translate-x-2"
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
@@ -204,7 +262,7 @@ const TopTours = () => {
                               <span>{tour.rating}</span>
                             </motion.div>
                             <motion.p 
-                              className="text-[#7FB2C2] font-bold font-montserrat text-lg leading-snug px-4 mb-4
+                              className="text-white font-bold font-montserrat text-lg leading-snug px-4 mb-4
                               transition-all duration-300 group-hover:translate-x-2"
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
@@ -213,7 +271,7 @@ const TopTours = () => {
                               {tour.desc}
                             </motion.p>
                           </CardContent>
-                        </Card>
+                        </div>
                       </motion.div>
                     </CarouselItem>
                   ))}

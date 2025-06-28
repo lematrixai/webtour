@@ -18,8 +18,8 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Mock tour data
-const toursData = [
+// Mock destination data
+const destinationsData = [
   {
     id: 1,
     title: "Santorini Adventure",
@@ -143,7 +143,7 @@ const toursData = [
 ];
 
 const categories = [
-  { id: 'all', label: 'All Tours', icon: '🌍' },
+  { id: 'all', label: 'All Destinations', icon: '🌍' },
   { id: 'vacation', label: 'Vacation', icon: '🏖️' },
   { id: 'adventure', label: 'Adventure', icon: '🏔️' },
   { id: 'cultural', label: 'Cultural', icon: '🏛️' },
@@ -159,27 +159,27 @@ const sortOptions = [
   { id: 'rating', label: 'Rating' }
 ];
 
-const Tours = () => {
-  const [tours, setTours] = useState(toursData);
-  const [filteredTours, setFilteredTours] = useState(toursData);
+const Destinations = () => {
+    const [destinations, setDestinations] = useState(destinationsData);
+  const [filteredDestinations, setFilteredDestinations] = useState(destinationsData);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [showFilters, setShowFilters] = useState(false);
 
-  // Filter and sort tours
+  // Filter and sort destinations
   useEffect(() => {
-    let filtered = tours.filter(tour => {
-      const matchesSearch = tour.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           tour.location.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === 'all' || tour.category === selectedCategory;
-      const matchesPrice = tour.price >= priceRange[0] && tour.price <= priceRange[1];
+    let filtered = destinations.filter(destination => {
+      const matchesSearch = destination.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           destination.location.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory === 'all' || destination.category === selectedCategory;
+      const matchesPrice = destination.price >= priceRange[0] && destination.price <= priceRange[1];
       
       return matchesSearch && matchesCategory && matchesPrice;
     });
 
-    // Sort tours
+    // Sort destinations
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'price-low':
@@ -195,8 +195,8 @@ const Tours = () => {
       }
     });
 
-    setFilteredTours(filtered);
-  }, [tours, searchTerm, selectedCategory, sortBy, priceRange]);
+    setFilteredDestinations(filtered);
+  }, [destinations, searchTerm, selectedCategory, sortBy, priceRange]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -235,10 +235,10 @@ const Tours = () => {
           >
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
               Discover Your
-              <span className="block text-[#E1C5A0]">Perfect Tour</span>
+              <span className="block text-[#E1C5A0]">Perfect Destination</span>
             </h1>
             <p className="text-xl text-[#E1C5A0]/80 max-w-2xl mx-auto">
-              Explore breathtaking destinations and create unforgettable memories with our curated collection of tours
+              Explore breathtaking destinations and create unforgettable memories with our curated collection of destinations
             </p>
           </motion.div>
         </div>
@@ -362,7 +362,7 @@ const Tours = () => {
         {/* Results Count */}
         <div className="flex justify-between items-center mb-8">
           <p className="text-[#E1C5A0]/80">
-            Showing {filteredTours.length} of {tours.length} tours
+            Showing {filteredDestinations.length} of {destinations.length} destinations
           </p>
           <div className="flex items-center gap-2 text-sm text-[#E1C5A0]/80">
             <span>View:</span>
@@ -375,29 +375,31 @@ const Tours = () => {
           </div>
         </div>
 
-        {/* Tours Grid */}
+        {/* Destinations Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {filteredTours.map((tour) => (
-            <motion.div key={tour.id} variants={itemVariants}>
+          {filteredDestinations.map((destination) => (
+            <motion.div key={destination.id} variants={itemVariants}>
               <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 py-0 pb-6 border-[#E1C5A0]/20  dark:border-[#E1C5A0]/30 bg-white/10 dark:bg-[#18130C]/50 backdrop-blur-sm overflow-hidden">
                 <div className="relative">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={tour.image}
-                      alt={tour.title}
-                      width={400}
-                      height={300}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
+                  <Link href={`/destinations/${destination.id}`}>
+                    <div className="aspect-[4/3] overflow-hidden cursor-pointer">
+                      <Image
+                        src={destination.image}
+                        alt={destination.title}
+                        width={400}
+                        height={300}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                  </Link>
                   
                   {/* Special Offer Badge */}
-                  {tour.isSpecialOffer && (
+                  {destination.isSpecialOffer && (
                     <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                       Special Offer
                     </div>
@@ -417,11 +419,11 @@ const Tours = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <CardTitle className="text-lg font-semibold text-white group-hover:text-[#E1C5A0] transition-colors">
-                        {tour.title}
+                          {destination.title}
                       </CardTitle>
                       <div className="flex items-center gap-1 text-[#E1C5A0]/80 mt-1">
                         <MapPin className="w-4 h-4" />
-                        <span className="text-sm">{tour.location}</span>
+                        <span className="text-sm">{destination.location}</span>
                       </div>
                     </div>
                   </div>
@@ -429,28 +431,28 @@ const Tours = () => {
 
                 <CardContent className="pt-0">
                   <p className="text-sm text-[#E1C5A0]/70  line-clamp-2">
-                    {tour.description}
+                    {destination.description}
                   </p>
                   
-                  {/* Tour Details */}
+                  {/* Destination Details */}
                   <div className="flex items-center justify-between text-sm text-[#E1C5A0]/60 mb-4">
                     <div className="flex items-center gap-1">
                       <Clock className="w-4 h-4" />
-                      <span>{tour.duration}</span>
+                      <span>{destination.duration}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Users className="w-4 h-4" />
-                      <span>{tour.groupSize}</span>
+                      <span>{destination.groupSize}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span>{tour.rating}</span>
+                      <span>{destination.rating}</span>
                     </div>
                   </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {tour.tags.slice(0, 2).map((tag, index) => (
+                    {destination.tags.slice(0, 2).map((tag, index) => (
                       <span
                         key={index}
                         className="px-2 py-1 bg-[#E1C5A0]/20 text-[#E1C5A0] text-xs rounded-full"
@@ -461,7 +463,7 @@ const Tours = () => {
                   </div>
 
                   {/* Action Button */}
-                  <Link href={`/tours/${tour.id}`}>
+                  <Link href={`/destinations/${destination.id}`}>
                     <Button className="w-full group-hover:bg-[#E1C5A0] group-hover:text-[#18130C] transition-all duration-300 bg-[#E1C5A0]/20 text-[#E1C5A0] border-[#E1C5A0]/30 hover:border-[#E1C5A0]">
                       View Details
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -474,7 +476,7 @@ const Tours = () => {
         </motion.div>
 
         {/* Load More Button */}
-        {filteredTours.length > 0 && (
+        {filteredDestinations.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -482,13 +484,13 @@ const Tours = () => {
             className="text-center mt-12"
           >
             <Button variant="outline" size="lg" className="px-8 py-3 border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 hover:border-[#E1C5A0] bg-white/10 dark:bg-[#18130C]/50 text-[#E1C5A0] hover:bg-[#E1C5A0]/10">
-              Load More Tours
+              Load More Destinations
             </Button>
           </motion.div>
         )}
 
         {/* No Results */}
-        {filteredTours.length === 0 && (
+        {filteredDestinations.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -496,7 +498,7 @@ const Tours = () => {
           >
             <div className="text-6xl mb-4">🌍</div>
             <h3 className="text-2xl font-semibold text-white mb-2">
-              No tours found
+              No destinations found
             </h3>
             <p className="text-[#E1C5A0]/80 mb-6">
               Try adjusting your search criteria or filters
@@ -520,4 +522,4 @@ const Tours = () => {
   );
 };
 
-export default Tours;
+export default Destinations;

@@ -26,14 +26,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-// Mock tour data (in a real app, this would come from an API)
-const tourData = {
+// Mock destination data (in a real app, this would come from an API)
+const destinationData = {
   id: 1,
   title: "Santorini Adventure",
   location: "Greece",
   country: "Greece",
-  price: 910,
-  originalPrice: 1200,
   rating: 4.8,
   reviewCount: 127,
   duration: "7 days",
@@ -163,16 +161,13 @@ const TourDetail = () => {
   const [guests, setGuests] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const totalPrice = tourData.price * guests;
-  const savings = (tourData.originalPrice - tourData.price) * guests;
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#18130C] via-[#18130C] to-[#18130C]/90">
       {/* Header */}
       <div className="bg-white/10 dark:bg-[#18130C]/90 backdrop-blur-xl border-b border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/tours">
+            <Link href="/destinations">
               <Button variant="ghost" className="flex items-center gap-2 text-[#E1C5A0] hover:bg-[#E1C5A0]/10">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Tours
@@ -203,15 +198,15 @@ const TourDetail = () => {
             <div className="space-y-4">
               <div className="aspect-[16/9] rounded-2xl overflow-hidden">
                 <Image
-                  src={tourData.images[selectedImage]}
-                  alt={tourData.title}
+                  src={destinationData.images[selectedImage]}
+                  alt={destinationData.title}
                   width={800}
                   height={450}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="grid grid-cols-4 gap-2">
-                {tourData.images.map((image, index) => (
+                {destinationData.images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
@@ -223,7 +218,7 @@ const TourDetail = () => {
                   >
                     <Image
                       src={image}
-                      alt={`${tourData.title} ${index + 1}`}
+                      alt={`${destinationData.title} ${index + 1}`}
                       width={200}
                       height={200}
                       className="w-full h-full object-cover"
@@ -236,40 +231,25 @@ const TourDetail = () => {
             {/* Tour Info */}
             <div className="space-y-6">
               <div>
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h1 className="text-4xl font-bold text-white mb-2">
-                      {tourData.title}
-                    </h1>
-                    <div className="flex items-center gap-4 text-[#E1C5A0]/80">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        <span>{tourData.location}, {tourData.country}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span>{tourData.rating} ({tourData.reviewCount} reviews)</span>
-                      </div>
+                <div className="mb-4">
+                  <h1 className="text-4xl font-bold text-white mb-2">
+                    {destinationData.title}
+                  </h1>
+                  <div className="flex items-center gap-4 text-[#E1C5A0]/80">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="w-4 h-4" />
+                      <span>{destinationData.location}, {destinationData.country}</span>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold text-[#E1C5A0]">
-                      ${tourData.price}
-                    </div>
-                    {tourData.originalPrice > tourData.price && (
-                      <div className="text-lg text-[#E1C5A0]/60 line-through">
-                        ${tourData.originalPrice}
-                      </div>
-                    )}
-                    <div className="text-sm text-green-400 font-medium">
-                      Save ${tourData.originalPrice - tourData.price}
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <span>{destinationData.rating} ({destinationData.reviewCount} reviews)</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {tourData.tags.map((tag, index) => (
+                  {destinationData.tags.map((tag, index) => (
                     <span
                       key={index}
                       className="px-3 py-1 bg-[#E1C5A0]/20 text-[#E1C5A0] text-sm rounded-full"
@@ -284,11 +264,11 @@ const TourDetail = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="flex items-center gap-2 text-[#E1C5A0]/80">
                   <Clock className="w-5 h-5" />
-                  <span>{tourData.duration}</span>
+                  <span>{destinationData.duration}</span>
                 </div>
                 <div className="flex items-center gap-2 text-[#E1C5A0]/80">
                   <Users className="w-5 h-5" />
-                  <span>{tourData.groupSize}</span>
+                  <span>{destinationData.groupSize}</span>
                 </div>
                 <div className="flex items-center gap-2 text-[#E1C5A0]/80">
                   <Calendar className="w-5 h-5" />
@@ -308,7 +288,7 @@ const TourDetail = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-[#E1C5A0]/80 leading-relaxed">
-                  {tourData.longDescription}
+                    {destinationData.longDescription}
                 </p>
               </CardContent>
             </Card>
@@ -320,7 +300,7 @@ const TourDetail = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {tourData.highlights.map((highlight, index) => (
+                  {destinationData.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                       <span className="text-[#E1C5A0]/80">{highlight}</span>
@@ -337,7 +317,7 @@ const TourDetail = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {tourData.itinerary.map((day) => (
+                  {destinationData.itinerary.map((day) => (
                     <div key={day.day} className="flex gap-4">
                       <div className="flex-shrink-0 w-12 h-12 bg-[#E1C5A0]/20 rounded-full flex items-center justify-center">
                         <span className="text-[#E1C5A0] font-semibold">{day.day}</span>
@@ -370,7 +350,7 @@ const TourDetail = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    {tourData.included.map((item, index) => (
+                    {destinationData.included.map((item, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-400" />
                         <span className="text-sm text-[#E1C5A0]/80">{item}</span>
@@ -386,7 +366,7 @@ const TourDetail = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    {tourData.notIncluded.map((item, index) => (
+                    {destinationData.notIncluded.map((item, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <div className="w-4 h-4 border-2 border-red-400/50 rounded-full flex items-center justify-center">
                           <div className="w-1.5 h-1.5 bg-red-400 rounded-full"></div>
@@ -406,7 +386,7 @@ const TourDetail = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {tourData.reviews.map((review) => (
+                  {destinationData.reviews.map((review) => (
                     <div key={review.id} className="border-b border-[#E1C5A0]/20 pb-6 last:border-b-0">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-semibold text-white">{review.name}</h4>
@@ -450,7 +430,7 @@ const TourDetail = () => {
                       className="w-full h-10 px-3 bg-white/10 dark:bg-[#18130C]/50 border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 rounded-md focus:border-[#E1C5A0] focus:outline-none text-[#E1C5A0]"
                     >
                       <option value="">Choose a date</option>
-                      {tourData.availability.map((date) => (
+                        {destinationData.availability.map((date) => (
                         <option 
                           key={date.date} 
                           value={date.date}
@@ -491,7 +471,7 @@ const TourDetail = () => {
                   </div>
 
                   {/* Email Field */}
-    <div>
+                  <div>
                     <label className="block text-sm font-medium text-[#E1C5A0] mb-2">
                       Email Address
                     </label>
@@ -502,30 +482,8 @@ const TourDetail = () => {
                     />
                   </div>
 
-                  {/* Price Breakdown */}
-                  <div className="space-y-2 pt-4 border-t border-[#E1C5A0]/20">
-                    <div className="flex justify-between">
-                      <span className="text-[#E1C5A0]/80">Price per person</span>
-                      <span className="text-[#E1C5A0]">${tourData.price}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-[#E1C5A0]/80">Guests</span>
-                      <span className="text-[#E1C5A0]">× {guests}</span>
-                    </div>
-                    {savings > 0 && (
-                      <div className="flex justify-between text-green-400">
-                        <span>You save</span>
-                        <span>-${savings}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between text-lg font-bold pt-2 border-t border-[#E1C5A0]/20">
-                      <span className="text-white">Total</span>
-                      <span className="text-[#E1C5A0]">${totalPrice}</span>
-                    </div>
-                  </div>
-
                   {/* Book Button */}
-                  <Link href={`/book-now?tourId=${id}`}>
+                    <Link href={`/book-now?destinationId=${destinationData.id}`}>
                     <Button className="w-full h-12 text-lg font-semibold bg-[#E1C5A0] text-[#18130C] hover:bg-[#E1C5A0]/90">
                       Book Now
                     </Button>

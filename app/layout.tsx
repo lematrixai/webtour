@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
 import PageTransition from "@/components/PageTransition";
+import Header from "@/components/Header";
 
 const afacad = Afacad({
   variable: "--font-afacad",
@@ -34,6 +35,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <PageTransition>
+              <Header />
               {children}
               <Footer/>
             </PageTransition>

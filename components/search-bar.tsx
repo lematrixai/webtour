@@ -39,6 +39,141 @@ function usePlaceholderTyper(phrases: string[], typingSpeed = 60, erasingSpeed =
   return placeholder
 }
 
+// Sequential animation hook for stunning placeholder cycling
+function useSequentialPlaceholderAnimation() {
+  const [currentPlaceholder, setCurrentPlaceholder] = useState("")
+  const [isTyping, setIsTyping] = useState(true)
+
+  const destinationPhrases = [
+    "Where do you want to go?",
+    "Search for destinations", 
+    "Find your next adventure",
+    "Discover amazing places",
+    "Explore the world"
+  ]
+
+  const [sequenceIndex, setSequenceIndex] = useState(0)
+  const currentPhrase = destinationPhrases[sequenceIndex]
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+
+    if (isTyping) {
+      if (currentPlaceholder.length < currentPhrase.length) {
+        timeout = setTimeout(() => {
+          setCurrentPlaceholder(currentPhrase.slice(0, currentPlaceholder.length + 1))
+        }, 100)
+      } else {
+        timeout = setTimeout(() => {
+          setIsTyping(false)
+        }, 2000)
+      }
+    } else {
+      if (currentPlaceholder.length > 0) {
+        timeout = setTimeout(() => {
+          setCurrentPlaceholder(currentPhrase.slice(0, currentPlaceholder.length - 1))
+        }, 50)
+      } else {
+        setIsTyping(true)
+        setSequenceIndex((prev) => (prev + 1) % destinationPhrases.length)
+      }
+    }
+
+    return () => clearTimeout(timeout)
+  }, [currentPlaceholder, isTyping, sequenceIndex, currentPhrase])
+
+  return currentPlaceholder
+}
+
+// Simple typing animation hook for a single phrase
+function useTypingAnimation(phrase: string, typingSpeed = 100, holdTime = 2000, erasingSpeed = 50) {
+  const [currentText, setCurrentText] = useState("")
+  const [isTyping, setIsTyping] = useState(true)
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+
+    if (isTyping) {
+      if (currentText.length < phrase.length) {
+        timeout = setTimeout(() => {
+          setCurrentText(phrase.slice(0, currentText.length + 1))
+        }, typingSpeed)
+      } else {
+        timeout = setTimeout(() => {
+          setIsTyping(false)
+        }, holdTime)
+      }
+    } else {
+      if (currentText.length > 0) {
+        timeout = setTimeout(() => {
+          setCurrentText(phrase.slice(0, currentText.length - 1))
+        }, erasingSpeed)
+      } else {
+        setIsTyping(true)
+      }
+    }
+
+    return () => clearTimeout(timeout)
+  }, [currentText, isTyping, phrase, typingSpeed, holdTime, erasingSpeed])
+
+  return currentText
+}
+
+// Tour guide sequential typing animation
+function useTourGuideAnimation() {
+  const [currentField, setCurrentField] = useState(0)
+  const [currentText, setCurrentText] = useState("")
+  const [isTyping, setIsTyping] = useState(true)
+  const [isWaiting, setIsWaiting] = useState(false)
+
+  const fieldPhrases = [
+    "Where do you want to go?",
+    "When do you want to travel?",
+    "How many travelers?"
+  ]
+
+  const currentPhrase = fieldPhrases[currentField]
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+
+    if (isWaiting) {
+      // Wait before moving to next field
+      timeout = setTimeout(() => {
+        setCurrentField((prev) => (prev + 1) % fieldPhrases.length)
+        setCurrentText("")
+        setIsTyping(true)
+        setIsWaiting(false)
+      }, 1000) // 1 second delay between fields
+    } else if (isTyping) {
+      if (currentText.length < currentPhrase.length) {
+        timeout = setTimeout(() => {
+          setCurrentText(currentPhrase.slice(0, currentText.length + 1))
+        }, 100) // Typing speed
+      } else {
+        // Finished typing, hold for reading
+        timeout = setTimeout(() => {
+          setIsTyping(false)
+        }, 2000) // Hold for 2 seconds
+      }
+    } else {
+      // Erasing
+      if (currentText.length > 0) {
+        timeout = setTimeout(() => {
+          setCurrentText(currentPhrase.slice(0, currentText.length - 1))
+        }, 50) // Fast erasing
+      } else {
+        // Finished erasing, wait before next field
+        setIsWaiting(true)
+      }
+    }
+
+    return () => clearTimeout(timeout)
+  }, [currentText, isTyping, isWaiting, currentField, currentPhrase])
+
+  return { currentText, currentField }
+}
+
 const PLACEHOLDER_PHRASES = [
   "Where do you want to go?",
   "Search for destinations",
@@ -88,7 +223,7 @@ const ModernSearchInput = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
-          className={`block w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md text-gray-800 dark:text-gray-200 placeholder-gray-500 border border-white/20 dark:border-gray-700/50 focus:border-[#E1C5A0] focus:outline-none focus:ring-2 focus:ring-[#E1C5A0]/20 transition-all duration-300 rounded-xl px-4 py-4 ${Icon ? 'pl-12' : 'pl-4'} ${inputClass}`}
+          className={`block w-full bg-[#E1C5A0]/20 backdrop-blur-md text-[#01293C] placeholder-[#01293C]/60 border-2 border-[#01293C]/30 focus:border-[#01293C] focus:outline-none focus:ring-2 focus:ring-[#01293C]/30 transition-all duration-300 rounded-xl px-4 py-4 ${Icon ? 'pl-12' : 'pl-4'} ${inputClass}`}
           {...props}
         />
         
@@ -97,8 +232,8 @@ const ModernSearchInput = ({
           htmlFor={id}
           className={`absolute pointer-events-none transition-all duration-300 text-sm font-medium py-2
             ${isFocused || value 
-              ? `text-[#E1C5A0] -top-4 bg-white/90 dark:bg-gray-900/90 px-2 rounded-md text-xs ${Icon ? 'left-12' : 'left-4'}` 
-              : `text-gray-500 dark:text-gray-400 top-[0.05px] ${Icon ? 'left-12' : 'left-4'}`
+              ? `text-[#01293C] -top-4 bg-[#E1C5A0]/90 px-2 rounded-md text-xs ${Icon ? 'left-12' : 'left-4'}` 
+              : `text-[#01293C]/70 top-[0.05px] ${Icon ? 'left-12' : 'left-4'}`
             }
           `}
         >
@@ -111,7 +246,7 @@ const ModernSearchInput = ({
 
 const SearchBar = () => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const placeholder = usePlaceholderTyper(PLACEHOLDER_PHRASES)
+  const { currentText, currentField } = useTourGuideAnimation()
   const [whereValue, setWhereValue] = useState("")
   const [whenValue, setWhenValue] = useState("")
   const [guestsValue, setGuestsValue] = useState("")
@@ -122,6 +257,14 @@ const SearchBar = () => {
       containerRef.current.classList.add("opacity-100", "translate-y-0")
     }
   }, [])
+
+  // Get placeholder for each field based on current tour position
+  const getFieldPlaceholder = (fieldIndex: number) => {
+    if (currentField === fieldIndex) {
+      return currentText
+    }
+    return ""
+  }
 
   return (
     <motion.div
@@ -136,7 +279,7 @@ const SearchBar = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 via-[#E1C5A0]/5 to-[#E1C5A0]/10 rounded-3xl blur-3xl" />
         
         {/* Main container */}
-        <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden">
+        <div className="relative bg-[#E1C5A0]/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-[#E1C5A0]/30 overflow-hidden">
           <div className="p-6 lg:p-8">
             {/* Header */}
             <motion.div 
@@ -145,10 +288,10 @@ const SearchBar = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center mb-8"
             >
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-2">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#01293C] mb-2">
                 Find Your Perfect Adventure
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 text-lg">
+              <p className="text-[#01293C]/80 text-lg">
                 Discover amazing destinations and create unforgettable memories
               </p>
             </motion.div>
@@ -166,9 +309,9 @@ const SearchBar = () => {
                 label="Destination"
                 value={whereValue}
                 onChange={e => setWhereValue(e.target.value)}
-                placeholder={placeholder}
+                placeholder={getFieldPlaceholder(0)}
                 icon={MapPin}
-                inputClass="text-lg"
+                inputClass="text-base"
                 aria-label="Search for a destination"
                 autoComplete="off"
               />
@@ -182,9 +325,9 @@ const SearchBar = () => {
                   console.log('When input changed:', e.target.value);
                   setWhenValue(e.target.value);
                 }}
-                placeholder="Select dates"
+                placeholder={getFieldPlaceholder(1)}
                 icon={Calendar}
-                inputClass="text-lg"
+                inputClass="text-base"
                 aria-label="Select travel dates"
               />
 
@@ -197,9 +340,9 @@ const SearchBar = () => {
                   console.log('Guests input changed:', e.target.value);
                   setGuestsValue(e.target.value);
                 }}
-                placeholder="Number of guests"
+                placeholder={getFieldPlaceholder(2)}
                 icon={Users}
-                inputClass="text-lg"
+                inputClass="text-base"
                 aria-label="Number of guests"
               />
 
@@ -211,7 +354,7 @@ const SearchBar = () => {
               >
                 <Button
                   size="icon"
-                  className="w-full h-14 bg-gradient-to-r from-[#E1C5A0] to-[#D4B890] hover:from-[#D4B890] hover:to-[#C7AB80] text-gray-800 font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl focus:ring-2 focus:ring-[#E1C5A0]/40"
+                  className="w-full h-14 bg-gradient-to-r from-[#01293C] to-[#023A52] hover:from-[#023A52] hover:to-[#034B68] text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl focus:ring-2 focus:ring-[#01293C]/40"
                   aria-label="Search"
                 >
                   <div className="flex items-center gap-3">
@@ -229,7 +372,7 @@ const SearchBar = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="text-center"
             >
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Popular destinations:</p>
+              <p className="text-sm text-[#01293C]/80 mb-3">Popular destinations:</p>
               <div className="flex flex-wrap justify-center gap-2">
                 {['Safari Tours', 'Beach Getaways', 'Mountain Adventures', 'City Breaks'].map((tag, index) => (
                   <motion.button
@@ -239,7 +382,7 @@ const SearchBar = () => {
                     transition={{ duration: 0.3, delay: 0.7 + index * 0.1 }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-4 py-2 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-white/20 dark:border-gray-700/50 rounded-full text-sm text-gray-700 dark:text-gray-300 hover:text-[#E1C5A0] hover:border-[#E1C5A0]/30 transition-all duration-300"
+                    className="px-4 py-2 bg-[#E1C5A0]/40 backdrop-blur-sm border border-[#E1C5A0]/60 rounded-full text-sm text-[#01293C] hover:text-[#01293C] hover:bg-[#E1C5A0]/60 hover:border-[#01293C]/30 transition-all duration-300"
                   >
                     {tag}
                   </motion.button>

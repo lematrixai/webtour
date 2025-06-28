@@ -2,39 +2,57 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
+// Using the same destinations data from the destinations page
 const destinations = [
   {
-    name: 'zanzibar',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+    id: 1,
+    name: 'Santorini Adventure',
+    location: 'Greece',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop',
   },
   {
-    name: 'nungwi',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
+    id: 2,
+    name: 'China Discovery',
+    location: 'China',
+    image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&h=600&fit=crop',
   },
   {
-    name: 'kilimanjaro',
-    image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80',
+    id: 3,
+    name: 'Costa Rica Nature',
+    location: 'Costa Rica',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop',
   },
   {
-    name: 'ngorongoro',
-    image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80',
+    id: 4,
+    name: 'Cuba Cultural Journey',
+    location: 'Cuba',
+    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop',
   },
   {
-    name: 'serengeti',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+    id: 5,
+    name: 'Mallorca Island Escape',
+    location: 'Spain',
+    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop',
   },
   {
-    name: 'materuni',
-    image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80',
+    id: 6,
+    name: 'Thailand Adventure',
+    location: 'Thailand',
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
   },
   {
-    name: 'rock city',
-    image: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=600&q=80',
+    id: 7,
+    name: 'Mykonos Paradise',
+    location: 'Greece',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop',
   },
   {
-    name: 'hot spring',
-    image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80',
+    id: 8,
+    name: 'California Dreaming',
+    location: 'USA',
+    image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=600&fit=crop',
   },
 ]
 
@@ -82,25 +100,29 @@ const TopDestinations = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           {destinations.map((dest) => (
-            <motion.div
-              key={dest.name}
-              variants={item}
-              whileHover={{ scale: 1.04 }}
-              className="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer min-h-[180px] h-48 md:h-56 bg-gray-200"
-            >
-              <img
-                src={dest.image}
-                alt={dest.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-all duration-500 group-hover:from-black/80" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-white text-2xl md:text-2xl font-bold font-jost drop-shadow-lg tracking-wide text-center">
-                  {dest.name}
-                </span>
-              </div>
-            </motion.div>
+            <Link key={dest.id} href={`/destinations/${dest.id}`}>
+              <motion.div
+                variants={item}
+                whileHover={{ scale: 1.04 }}
+                className="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer min-h-[180px] h-48 md:h-56 bg-gray-200"
+              >
+                <img
+                  src={dest.image}
+                  alt={dest.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-all duration-500 group-hover:from-black/80" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-white text-xl md:text-2xl font-bold font-jost drop-shadow-lg tracking-wide text-center mb-1">
+                    {dest.name}
+                  </span>
+                  <span className="text-[#E1C5A0] text-sm font-medium drop-shadow-lg">
+                    {dest.location}
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
         
@@ -110,7 +132,9 @@ const TopDestinations = () => {
             whileTap={{ scale: 0.95 }}
             className="bg-[#E1C5A0] text-[#01293C] px-8 py-3 rounded-full font-semibold font-montserrat hover:bg-[#D4B890] transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
+            <Link href="/destinations">
             View More
+            </Link>
           </motion.button>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { CiMenuBurger } from "react-icons/ci";
+import { IoClose } from "react-icons/io5";
 import { ModeToggle } from "./ui/mode-toggle";
 import {
   DropdownMenu,
@@ -26,6 +27,7 @@ const scrollToSection = (id: string) => {
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,14 +48,21 @@ const Header = () => {
     };
   }, []);
 
-  const navItems = [
+  const navItems: Array<{
+    label: string;
+    href?: string;
+    action?: () => void;
+    isButton?: boolean;
+  }> = [
     { label: 'Home', action: () => scrollToSection('below-hero') },
     { label: 'Tour', href: '/tours' },
+    { label: 'Destinations', href: '/destinations' },
     { label: 'Services', href: '/services' },
     { label: 'Contact', action: () => scrollToSection('footer') },
     { label: 'About', action: () => scrollToSection('about') },
-    { label: 'Book Now', href: '/book-now', isButton: true },
   ];
+
+  const bookNowItem = { label: 'Book Now', href: '/book-now', isButton: true };
 
   return (
     <motion.header
@@ -63,7 +72,7 @@ const Header = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ease-out
         ${scrolled 
-          ? 'bg-white/80 dark:bg-[#18130C]/90 backdrop-blur-xl border-b border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 shadow-2xl' 
+          ? 'bg-white/10 backdrop-blur-xl dark:bg-black/10 border-b border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 shadow-2xl' 
           : 'bg-transparent'
         }`}
     >
@@ -91,7 +100,7 @@ const Header = () => {
                       <Link href={item.href}>
                         <span className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer group ${
                           item.isButton 
-                            ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-lg shadow-md hover:shadow-lg hover:scale-105' 
+                            ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded hover:shadow-lg hover:scale-105' 
                             : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
                         }`}>
                           {item.label}
@@ -133,6 +142,7 @@ const Header = () => {
             style={{ zIndex: 10 }}
           >
             <div className="relative">
+              <Link href="/">
               <Image 
                 src="/logo.png" 
                 alt="logo" 
@@ -140,6 +150,8 @@ const Header = () => {
                 width={160} 
                 height={56} 
               />
+              </Link>
+              <Link href="/">   
               <Image 
                 src="/logo.png" 
                 alt="logo" 
@@ -147,11 +159,14 @@ const Header = () => {
                 width={80} 
                 height={80} 
               />
+              </Link>
             </div>
           </motion.div>
 
           {/* Right Side Controls */}
-          <div className="flex flex-1 items-center justify-end min-w-0">
+          <div className="flex flex-1 items-center justify-end min-w-0 space-x-4">
+           
+
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
@@ -160,17 +175,35 @@ const Header = () => {
               {/* Mode Toggle - left */}
               <div className="flex items-center px-1.5 py-1">
                 <ModeToggle scrolled={scrolled} />
+                
               </div>
               {/* Divider */}
-              <div className="w-px h-6 bg-[#E1C5A0]/40 dark:bg-[#E1C5A0]/60 mx-1" />
+              {/* <div className="w-px h-6 bg-[#E1C5A0]/40 dark:bg-[#E1C5A0]/60 mx-1" /> */}
+               {/* Book Now Button */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="hidden lg:block"
+            >
+              <Link href={bookNowItem.href!}>
+                <button className="bg-gradient-to-r mr-1 from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] px-6 py-2 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium">
+                  {bookNowItem.label}
+                </button>
+              </Link>
+            </motion.div>
               {/* Mobile Menu - right */}
               {(!scrolled || isMobile) && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="flex items-center px-1.5 py-1 focus:outline-none focus:ring-2 focus:ring-[#E1C5A0]/50">
-                    <CiMenuBurger className="w-5 h-5 text-[#18130C] dark:text-white transition-colors duration-300" />
+                <DropdownMenu onOpenChange={setIsMenuOpen}>
+                  <DropdownMenuTrigger className="flex items-center px-1.5 py-1 focus:outline-none hover:text-[#E1C5A0] transition-colors duration-300">
+                    {isMenuOpen ? (
+                      <IoClose className="w-5 h-5 text-[#18130C] dark:text-white transition-colors duration-300" />
+                    ) : (
+                      <CiMenuBurger className="w-5 h-5 text-[#18130C] dark:text-white transition-colors duration-300" />
+                    )}
                   </DropdownMenuTrigger>
                   <DropdownMenuContent 
-                    className="bg-white/95 dark:bg-[#18130C]/95 backdrop-blur-xl border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/40 shadow-2xl rounded-2xl p-2 min-w-[200px] mt-2"
+                    className="bg-white/10 dark:bg-black/10 backdrop-blur-xl border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/40 shadow-2xl rounded-2xl p-2 min-w-[200px] mt-2"
                     align="end"
                   >
                     {navItems.map((item, index) => (
@@ -179,13 +212,21 @@ const Header = () => {
                         className={`text-sm font-medium transition-all duration-300 cursor-pointer p-3 ${
                           item.isButton 
                             ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-xl shadow-md hover:shadow-lg' 
-                            : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 rounded-xl'
+                            : 'text-gray-700 dark:text-gray-200 hover:text-[#E1C5A0] rounded-xl'
                         }`}
                         onClick={item.action}
                       >
                         {item.label}
                       </DropdownMenuItem>
                     ))}
+                    {/* Book Now in mobile menu */}
+                    <DropdownMenuItem 
+                      className="bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-xl shadow-md hover:shadow-lg text-sm font-medium transition-all duration-300 cursor-pointer p-3"
+                    >
+                      <Link href={bookNowItem.href!}>
+                        {bookNowItem.label}
+                      </Link>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               )}
@@ -199,13 +240,17 @@ const Header = () => {
                 transition={{ duration: 0.3 }}
                 className="relative group md:hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="relative bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-gray-700/50 rounded-xl p-3 shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
-                    <CiMenuBurger className="w-5 h-5 lg:w-6 lg:h-6 text-gray-700 dark:text-gray-200 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/20 to-[#E1C5A0]/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <DropdownMenu onOpenChange={setIsMenuOpen}>
+                  <DropdownMenuTrigger className="relative bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-gray-700/50 rounded-xl p-3 shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none hover:text-[#E1C5A0]">
+                    {isMenuOpen ? (
+                      <IoClose className="w-5 h-5 lg:w-6 lg:h-6 text-gray-700 dark:text-gray-200 transition-colors duration-300" />
+                    ) : (
+                      <CiMenuBurger className="w-5 h-5 lg:w-6 lg:h-6 text-gray-700 dark:text-gray-200 transition-colors duration-300 focus:outline-none" />
+                    )}
                   </DropdownMenuTrigger>
                   <DropdownMenuContent 
-                    className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/50 shadow-2xl rounded-2xl p-2 min-w-[200px] mt-2"
+                    className="bg-white/10 dark:bg-black/10 backdrop-blur-xl border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/40 shadow-2xl rounded-2xl p-2 min-w-[200px] mt-2"
                     align="end"
                   >
                     {navItems.map((item, index) => (
@@ -214,13 +259,21 @@ const Header = () => {
                         className={`text-sm font-medium transition-all duration-300 cursor-pointer p-3 ${
                           item.isButton 
                             ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-xl shadow-md hover:shadow-lg' 
-                            : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 rounded-xl'
+                            : 'text-gray-700 dark:text-gray-200 hover:text-[#E1C5A0] hover:bg-[#E1C5A0] rounded-xl'
                         }`}
                         onClick={item.action}
                       >
                         {item.label}
                       </DropdownMenuItem>
                     ))}
+                    {/* Book Now in mobile menu */}
+                    <DropdownMenuItem 
+                      className="bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-xl shadow-md hover:shadow-lg text-sm font-medium transition-all duration-300 cursor-pointer p-3"
+                    >
+                      <Link href={bookNowItem.href!}>
+                        {bookNowItem.label}
+                      </Link>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </motion.div>
