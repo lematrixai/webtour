@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
 import PageTransition from "@/components/PageTransition";
-import Header from "@/components/Header";
+import ConditionalHeader from "@/components/conditional-header";
 
 const afacad = Afacad({
   variable: "--font-afacad",
@@ -17,7 +17,6 @@ const ephesis = Ephesis({
   subsets: ["latin"],
   weight: ["400"],
 });
-
 
 export const metadata: Metadata = {
   title: "Luxury adventure tour",
@@ -42,7 +41,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <PageTransition>
-              <Header />
+              <ConditionalHeader />
               {children}
               <Footer/>
             </PageTransition>

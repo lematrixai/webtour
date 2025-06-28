@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { 
   User, 
   Mail, 
@@ -20,6 +19,7 @@ import {
   CheckCircle
 } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { Textarea } from '@/components/ui/textarea';
 
 const BookNow = () => {
   const searchParams = useSearchParams();

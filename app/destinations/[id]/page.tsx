@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -20,86 +20,183 @@ import {
   Globe,
   Shield,
   Award,
-  Clock as ClockIcon
+  Clock as ClockIcon,
+  Play,
+  Pause
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-// Mock destination data (in a real app, this would come from an API)
+// Video component with proper error handling
+const VideoPlayer = React.forwardRef<HTMLVideoElement, {
+  src: string;
+  poster?: string;
+  className?: string;
+  autoPlay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  controls?: boolean;
+  onError?: () => void;
+}>(({ 
+  src, 
+  poster, 
+  className, 
+  autoPlay = false, 
+  muted = true, 
+  loop = false, 
+  controls = false,
+  onError 
+}, ref) => {
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const video = ref as React.RefObject<HTMLVideoElement>;
+    if (!video?.current) return;
+
+    const handleError = (e: Event) => {
+      console.error('Video error:', e);
+      setHasError(true);
+      onError?.();
+    };
+
+    video.current.addEventListener('error', handleError);
+    return () => video.current?.removeEventListener('error', handleError);
+  }, [ref, onError]);
+
+  if (hasError) {
+    return (
+      <div className={`${className} bg-gray-800 flex items-center justify-center`}>
+        <div className="text-center text-gray-400">
+          <Play className="w-12 h-12 mx-auto mb-2" />
+          <p className="text-sm">Video unavailable</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      poster={poster}
+      className={className}
+      autoPlay={autoPlay}
+      muted={muted}
+      loop={loop}
+      controls={controls}
+      playsInline
+      preload="metadata"
+    />
+  );
+});
+
+VideoPlayer.displayName = 'VideoPlayer';
+
+// Mock destination data with videos (in a real app, this would come from an API)
 const destinationData = {
   id: 1,
-  title: "Santorini Adventure",
-  location: "Greece",
-  country: "Greece",
-  rating: 4.8,
-  reviewCount: 127,
-  duration: "7 days",
-  groupSize: "12 people",
-  images: [
-    "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop"
+  title: "Zanzibar Island Adventure",
+  location: "Zanzibar",
+  country: "Tanzania",
+  rating: 4.9,
+  reviewCount: 156,
+  duration: "8 days",
+  groupSize: "10 people",
+  videos: [
+    {
+      id: 1,
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/beach-castle",
+      title: "Zanzibar Beach Paradise",
+      description: "Pristine white sand beaches and turquoise waters"
+    },
+    {
+      id: 2,
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/architecture-signs",
+      title: "Stone Town Heritage",
+      description: "Historic architecture and cultural landmarks"
+    },
+    {
+      id: 3,
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains",
+      title: "Spice Island Experience",
+      description: "Aromatic spice plantations and traditional farming"
+    },
+    {
+      id: 4,
+      url: "https://res.cloudinary.com/dj7odelpw/video/upload/v1/hero-bg_akcj3t",
+      thumbnail: "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/beach-castle",
+      title: "Crystal Clear Waters",
+      description: "Snorkeling and marine life exploration"
+    }
   ],
-  category: "vacation",
-  description: "Experience the stunning beauty of Santorini with its iconic white buildings and breathtaking sunsets. This 7-day adventure takes you through the most picturesque locations on the island, from the famous blue-domed churches of Oia to the volcanic beaches of Perissa.",
-  longDescription: `Santorini, the crown jewel of the Cyclades, awaits your discovery. This meticulously crafted 7-day adventure combines luxury, culture, and natural beauty in perfect harmony.
+  category: "beach",
+  description: "Discover the enchanting island of Zanzibar, where pristine white-sand beaches meet rich cultural heritage. This 8-day adventure takes you through the historic Stone Town, spice plantations, and the most beautiful beaches in East Africa.",
+  longDescription: `Zanzibar, the "Spice Island" of Tanzania, is a paradise where turquoise waters meet centuries-old history. This meticulously crafted 8-day adventure combines luxury beach experiences with authentic cultural immersion in perfect harmony.
 
-Your journey begins in the charming capital of Fira, where you'll be greeted with panoramic views of the caldera. Each day brings new discoveries - from the iconic blue-domed churches of Oia to the volcanic beaches of Perissa, from traditional villages to world-class wineries.
+Your journey begins in the historic Stone Town, a UNESCO World Heritage site where narrow alleys reveal the island's rich trading history. Each day brings new discoveries - from pristine beaches with crystal-clear waters to aromatic spice plantations, from traditional dhow sailing to vibrant local markets.
 
-Our expert local guides will share the island's rich history, from its volcanic origins to its role in ancient maritime trade. You'll experience authentic Greek hospitality, savor local cuisine, and create memories that will last a lifetime.
+Our expert local guides will share the island's fascinating history, from its role in the spice trade to its unique blend of African, Arab, and European influences. You'll experience authentic Swahili hospitality, savor local cuisine, and create memories that will last a lifetime.
 
-The tour includes luxury accommodations with caldera views, all transportation, guided tours, and most meals. Small group sizes ensure personalized attention and an intimate experience.`,
+The tour includes luxury beachfront accommodations, all transportation, guided tours, and most meals. Small group sizes ensure personalized attention and an intimate experience.`,
   isSpecialOffer: true,
-  tags: ["Romantic", "Beach", "Cultural", "Luxury"],
+  tags: ["Beach", "Cultural", "Luxury", "Spice Island"],
   highlights: [
-    "Visit the iconic blue-domed churches of Oia",
-    "Witness breathtaking sunsets over the caldera",
-    "Explore traditional villages and local markets",
-    "Taste authentic Greek cuisine and local wines",
-    "Relax on volcanic beaches",
-    "Learn about the island's volcanic history"
+    "Explore the historic Stone Town UNESCO site",
+    "Relax on pristine white-sand beaches",
+    "Visit aromatic spice plantations",
+    "Experience traditional dhow sailing",
+    "Discover local markets and cuisine",
+    "Swim in crystal-clear turquoise waters"
   ],
   itinerary: [
     {
       day: 1,
-      title: "Arrival & Welcome",
-      description: "Arrive in Santorini and transfer to your luxury hotel. Welcome dinner with caldera views.",
-      activities: ["Airport transfer", "Hotel check-in", "Welcome dinner"]
+      title: "Arrival & Stone Town",
+      description: "Arrive in Zanzibar and transfer to your luxury hotel. Welcome dinner in historic Stone Town.",
+      activities: ["Airport transfer", "Hotel check-in", "Stone Town welcome dinner"]
     },
     {
       day: 2,
-      title: "Fira & Caldera Views",
-      description: "Explore the capital of Santorini and enjoy panoramic views of the volcanic caldera.",
-      activities: ["Fira walking tour", "Cable car experience", "Local lunch"]
+      title: "Stone Town Heritage Tour",
+      description: "Explore the UNESCO World Heritage site with its historic architecture and rich culture.",
+      activities: ["Stone Town walking tour", "House of Wonders", "Local lunch"]
     },
     {
       day: 3,
-      title: "Oia Sunset Experience",
-      description: "Discover the most photographed village in Greece and witness the famous sunset.",
-      activities: ["Oia exploration", "Sunset viewing", "Dinner in Oia"]
+      title: "Spice Plantation Tour",
+      description: "Visit aromatic spice plantations and learn about Zanzibar's spice trade history.",
+      activities: ["Spice plantation tour", "Spice tasting", "Traditional dinner"]
     },
     {
       day: 4,
-      title: "Volcanic Beaches",
-      description: "Visit the unique black and red beaches created by volcanic activity.",
-      activities: ["Perissa beach", "Red beach visit", "Swimming"]
+      title: "Beach Paradise",
+      description: "Relax on pristine beaches and enjoy water activities in crystal-clear waters.",
+      activities: ["Beach relaxation", "Swimming", "Water sports"]
     },
     {
       day: 5,
-      title: "Wine Tasting",
-      description: "Experience Santorini's unique volcanic wines and traditional winemaking.",
-      activities: ["Winery tour", "Wine tasting", "Traditional dinner"]
+      title: "Dhow Sailing Experience",
+      description: "Experience traditional dhow sailing and snorkeling in the Indian Ocean.",
+      activities: ["Dhow sailing", "Snorkeling", "Beach picnic"]
     },
     {
       day: 6,
-      title: "Traditional Villages",
-      description: "Explore authentic villages away from the tourist crowds.",
-      activities: ["Pyrgos village", "Local market", "Cooking class"]
+      title: "Local Markets & Cuisine",
+      description: "Explore vibrant local markets and learn about Swahili cuisine.",
+      activities: ["Market tour", "Cooking class", "Local dinner"]
     },
     {
       day: 7,
+      title: "Free Day & Relaxation",
+      description: "Enjoy a free day to explore or relax at your leisure.",
+      activities: ["Free time", "Optional activities", "Farewell dinner"]
+    },
+    {
+      day: 8,
       title: "Departure",
       description: "Farewell breakfast and transfer to the airport.",
       activities: ["Breakfast", "Airport transfer"]
@@ -156,10 +253,11 @@ The tour includes luxury accommodations with caldera views, all transportation, 
 const TourDetail = () => {
   const params = useParams();
   const id = params?.id;
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedVideo, setSelectedVideo] = useState(0);
   const [selectedDate, setSelectedDate] = useState('');
   const [guests, setGuests] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#18130C] via-[#18130C] to-[#18130C]/90">
@@ -194,37 +292,25 @@ const TourDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Image Gallery */}
+            {/* Video Gallery */}
             <div className="space-y-4">
-              <div className="aspect-[16/9] rounded-2xl overflow-hidden">
-                <Image
-                  src={destinationData.images[selectedImage]}
-                  alt={destinationData.title}
-                  width={800}
-                  height={450}
+              <div className="aspect-[16/9] rounded-2xl overflow-hidden relative">
+                <VideoPlayer
+                  ref={(el) => {
+                    videoRefs.current[selectedVideo] = el;
+                  }}
+                  src={destinationData.videos[selectedVideo].url}
+                  poster={destinationData.videos[selectedVideo].thumbnail}
                   className="w-full h-full object-cover"
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  onError={() => {
+                    console.error("Error loading main video");
+                  }}
                 />
-              </div>
-              <div className="grid grid-cols-4 gap-2">
-                {destinationData.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                      selectedImage === index 
-                        ? 'border-[#E1C5A0]' 
-                        : 'border-[#E1C5A0]/20 hover:border-[#E1C5A0]/50'
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${destinationData.title} ${index + 1}`}
-                      width={200}
-                      height={200}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
               </div>
             </div>
 
@@ -437,7 +523,7 @@ const TourDetail = () => {
                           disabled={!date.available}
                           className="bg-[#18130C] text-[#E1C5A0]"
                         >
-                          {new Date(date.date).toLocaleDateString()} 
+                          {new Date(date.date).toLocaleDateString('en-GB')} 
                           {!date.available && ' (Full)'}
                         </option>
                       ))}
