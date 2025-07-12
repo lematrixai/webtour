@@ -101,27 +101,27 @@ const TopDestinations = () => {
         >
           {destinations.map((dest) => (
             <Link key={dest.id} href={`/destinations/${dest.id}`}>
-              <motion.div
-                variants={item}
-                whileHover={{ scale: 1.04 }}
-                className="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer min-h-[180px] h-48 md:h-56 bg-gray-200"
-              >
-                <img
-                  src={dest.image}
-                  alt={dest.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-all duration-500 group-hover:from-black/80" />
+            <motion.div
+              variants={item}
+              whileHover={{ scale: 1.04 }}
+              className="relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer min-h-[180px] h-48 md:h-56 bg-gray-200"
+            >
+              <img
+                src={dest.image}
+                alt={dest.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-all duration-500 group-hover:from-black/80" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-white text-xl md:text-2xl font-bold font-jost drop-shadow-lg tracking-wide text-center mb-1">
-                    {dest.name}
-                  </span>
+                  {dest.name}
+                </span>
                   <span className="text-[#E1C5A0] text-sm font-medium drop-shadow-lg">
                     {dest.location}
                   </span>
-                </div>
-              </motion.div>
+              </div>
+            </motion.div>
             </Link>
           ))}
         </motion.div>
