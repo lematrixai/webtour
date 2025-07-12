@@ -3,7 +3,7 @@ import HeroSection from "@/components/Hero-section";
 import SearchBar from "@/components/search-bar";
 import TopDestinations from "@/components/Top-destinations";
 import WhyBookWithUs from "@/components/WhyBookWithUs";
-import TopTour from "@/components/top-tour";
+import TopTour from "@/components/_top-tour";
 import BannerFlex from "@/components/banner-flex";
 import BannerCancel from "@/components/banner-cancel";
 import ExploreGallery from "@/components/explore-gallery";

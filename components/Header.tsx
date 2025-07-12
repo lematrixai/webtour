@@ -14,7 +14,6 @@ import {
 import { scroller } from 'react-scroll';
 import { useEffect, useState } from 'react';
 import Link from "next/link";
-import { label } from "framer-motion/client";
 import { 
   Home,
   Plane,
@@ -131,7 +130,7 @@ const Header = () => {
                           <span className={`relative px-4 py-2 text-base font-medium transition-all duration-300 cursor-pointer group ${
                             item.isButton 
                               ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded hover:shadow-lg hover:scale-105' 
-                              : 'text-gray-100 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                              : 'text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
                           }`}>
                             {item.label}
                             {!item.isButton && (
@@ -145,7 +144,7 @@ const Header = () => {
                           className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer group ${
                             item.isButton 
                               ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-lg shadow-md hover:shadow-lg hover:scale-105' 
-                              : 'text-gray-100 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                              : 'text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
                           }`}
                         >
                           {item.label}
@@ -236,6 +235,8 @@ const Header = () => {
                       align="end"
                     >
                       {webNavItems.map((item, index) => (
+                                                  <Link key={item.label} href={item.href!}>
+
                         <DropdownMenuItem 
                           key={item.label}
                           className={`text-base font-medium transition-all duration-300 cursor-pointer p-3 ${
@@ -245,11 +246,14 @@ const Header = () => {
                           }`}
                           onClick={item.action}
                         >
-                          <div className="flex items-center space-x-2">
-                            {item.icon && <span className="text-[#E1C5A0]">{item.icon}</span>}
-                            <span>{item.label}</span>
-                          </div>
+                            <div className="flex items-center space-x-2">
+                              {item.icon && <span className="text-[#E1C5A0]">{item.icon}</span>}
+                              <span>{item.label}</span>
+                            </div>
+                         
                         </DropdownMenuItem>
+                        </Link>
+
                       ))}
                      
                     </DropdownMenuContent>
