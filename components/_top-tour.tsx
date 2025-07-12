@@ -169,7 +169,7 @@ const TopTours = () => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-center mb-10 font-montserrat text-[#E1C5A0]"
+          className="text-3xl md:text-4xl font-bold text-center mb-10 text-dancing_script text-[#E1C5A0]"
         >
           Top Tours
         </motion.h2>

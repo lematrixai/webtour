@@ -58,7 +58,7 @@ const HeroSection = () => {
             transition={{ duration: 1, delay: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-6xl font-jost md:text-8xl font-bold text-[#E1C5A0] mb-4 drop-shadow-2xl">
+            <h1 className="text-6xl md:text-8xl font-bold text-[#E1C5A0] mb-4 drop-shadow-2xl">
               Welcome Aboard
             </h1>
           </motion.div>

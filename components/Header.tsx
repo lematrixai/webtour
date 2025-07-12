@@ -208,7 +208,7 @@ const Header = () => {
                 className="relative group flex items-center bg-white/10 dark:bg-[#E1C5A0]/10 backdrop-blur-md border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/40 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hidden md:flex"
               >
                 {/* Mode Toggle - left */}
-                <div className="flex items-center px-1.5 py-1">
+                <div className="flex items-center text-black px-1.5 py-1">
                   <ModeToggle scrolled={scrolled} />
                   
                 </div>

@@ -19,7 +19,7 @@ const CTA = () => {
     >
       {/* Left: Text */}
       <div className="z-10 flex-1 flex flex-col items-start justify-center text-white max-w-lg md:pl-8">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight drop-shadow-lg">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight drop-shadow-lg text-dancing_script">
           Check Our Exclusive<br />Tour Offer
         </h2>
         <p className="text-lg md:text-2xl font-medium mb-8 drop-shadow-md">

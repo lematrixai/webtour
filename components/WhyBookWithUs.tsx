@@ -60,7 +60,7 @@ const WhyBookWithUs = () => {
             </>
           ) : (
             <>
-        <h2 className="text-3xl md:text-4xl font-bold font-jost text-[#01293C]">
+        <h2 className="text-3xl md:text-4xl font-bold text-dancing_script text-[#01293C]">
           Why Book With Us?
         </h2>
         <p className="text-xl text-gray-600 leading-relaxed font-jost">

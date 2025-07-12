@@ -27,14 +27,14 @@ const Services = () => {
     {
       id: 1,
       title: "Zanzibar Paradise",
-      subtitle: "Spice Island Luxury",
+      subtitle: "Spice Island Luxury", 
       location: "Zanzibar, Tanzania",
       duration: "7-14 Days",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&h=600&fit=crop",
       description: "Experience the magic of Zanzibar's pristine beaches, historic Stone Town, and vibrant culture. From spice tours to sunset dhow cruises, every moment is crafted for luxury and authenticity.",
       highlights: [
         "Historic Stone Town exploration",
-        "Spice farm tours",
+        "Spice farm tours", 
         "Pristine beach experiences",
         "Traditional dhow sailing",
         "Luxury beachfront accommodation"
@@ -96,24 +96,7 @@ const Services = () => {
       price: "From $3,800",
       category: "adventure"
     },
-    {
-      id: 5,
-      title: "Tanzania Cultural Journey",
-      subtitle: "Heritage & Traditions",
-      location: "Multiple Regions",
-      duration: "10-14 Days",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
-      description: "Immerse yourself in Tanzania's rich cultural heritage. Visit traditional villages, learn from local artisans, and experience authentic ceremonies that have been passed down through generations.",
-      highlights: [
-        "Traditional village visits",
-        "Local artisan workshops",
-        "Cultural ceremonies",
-        "Traditional cuisine",
-        "Community homestays"
-      ],
-      price: "From $2,800",
-      category: "cultural"
-    }
+   
   ];
 
   const features = [
@@ -135,7 +118,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#18130C] via-[#18130C] to-[#18130C]/90">
+    <div className="min-h-screen pb-8">
       {/* Hero Section */}
       <div className="relative h-[80vh] bg-gradient-to-r from-[#E1C5A0]/10 via-[#E1C5A0]/5 to-[#E1C5A0]/10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#18130C]/80" />
@@ -179,13 +162,13 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold text-white mb-6">
-              Why Choose
-              <span className="block text-[#E1C5A0]">Our Experiences?</span>
+            <h2 className="text-4xl text-dancing_script invert-25 md:text-3xl font-bold text-[#18130C]/90 dark:text-white mb-4">
+              Why Choose Our Experiences?
             </h2>
-            <p className="text-xl text-[#E1C5A0]/80 max-w-3xl mx-auto">
+            <p className="text-lg text-[#18130C]/70 dark:text-[#E1C5A0]/80 mb-4 max-w-2xl mx-auto">
               We create bespoke journeys that combine luxury, authenticity, and responsible travel principles
             </p>
+            <div className="w-24 h-1 bg-[#E1C5A0] mx-auto"></div>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -196,13 +179,13 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="text-center p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-[#E1C5A0]/20"
+                className="text-center p-8 bg-[#F5F1E8] dark:bg-[#2A2419] backdrop-blur-sm rounded-2xl border-2 border-[#E1C5A0]/80 dark:border-[#E1C5A0]/50"
               >
                 <div className="text-[#E1C5A0] mb-4 flex justify-center">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
-                <p className="text-[#E1C5A0]/80 leading-relaxed">{feature.description}</p>
+                <h3 className="text-2xl font-bold text-[#18130C] dark:text-white mb-4">{feature.title}</h3>
+                <p className="text-[#18130C]/80 dark:text-[#E1C5A0]/80 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -219,13 +202,13 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold text-white mb-6">
-              Unforgettable
-              <span className="block text-[#E1C5A0]">Experiences</span>
+            <h2 className="text-4xl text-dancing_script invert-25 md:text-3xl font-bold text-[#18130C]/90 dark:text-white mb-4">
+              Unforgettable Experiences
             </h2>
-            <p className="text-xl text-[#E1C5A0]/80 max-w-3xl mx-auto">
+            <p className="text-lg text-[#18130C]/70 dark:text-[#E1C5A0]/80 mb-4 max-w-2xl mx-auto">
               Whatever you're interested in, we will create your bespoke, perfect trip
             </p>
+            <div className="w-24 h-1 bg-[#E1C5A0] mx-auto"></div>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8">
@@ -236,7 +219,7 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group bg-white/5 backdrop-blur-sm rounded-3xl border border-[#E1C5A0]/20 overflow-hidden hover:border-[#E1C5A0]/40 transition-all duration-500"
+                className="group bg-[#F5F1E8] dark:bg-[#2A2419] backdrop-blur-sm rounded-3xl border-2 border-[#E1C5A0]/80 dark:border-[#E1C5A0]/50 overflow-hidden hover:border-[#E1C5A0] transition-all duration-500"
               >
                 <div className="relative h-64 overflow-hidden">
                   <Image
@@ -269,15 +252,15 @@ const Services = () => {
                     </div>
                   </div>
                   
-                  <p className="text-[#E1C5A0]/80 mb-6 leading-relaxed">
+                  <p className="text-[#18130C]/80 dark:text-[#E1C5A0]/80 mb-6 leading-relaxed">
                     {pkg.description}
                   </p>
                   
                   <div className="mb-6">
-                    <h4 className="text-white font-semibold mb-3">Highlights:</h4>
+                    <h4 className="text-[#18130C] dark:text-white font-semibold mb-3">Highlights:</h4>
                     <div className="grid grid-cols-1 gap-2">
                       {pkg.highlights.slice(0, 3).map((highlight, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-[#E1C5A0]/70">
+                        <div key={idx} className="flex items-center gap-2 text-[#18130C]/70 dark:text-[#E1C5A0]/70">
                           <Star className="w-3 h-3 text-[#E1C5A0]" />
                           <span className="text-sm">{highlight}</span>
                         </div>
@@ -307,11 +290,10 @@ const Services = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl font-bold text-white mb-6">
-              Your Adventure
-              <span className="block text-[#E1C5A0]">Starts Now</span>
+            <h2 className="text-4xl text-dancing_script invert-25 md:text-3xl font-bold text-[#18130C]/90 dark:text-white mb-4">
+              Your Adventure Starts Now
             </h2>
-            <p className="text-xl text-[#E1C5A0]/80 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-[#18130C]/70 dark:text-[#E1C5A0]/80 mb-4 max-w-2xl mx-auto">
               Whatever you want your luxury private tour or safari itinerary to include, 
               we'll create something fully bespoke for you… and only you.
             </p>
