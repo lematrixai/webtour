@@ -24,8 +24,8 @@ export function ModeToggle({ scrolled = false }: ModeToggleProps) {
   }
 
   const iconColor = scrolled 
-    ? "text-[#18130C] dark:text-white hover:text-[#E1C5A0]" 
-    : "text-white hover:text-[#E1C5A0]"
+    ? "text-gray-700 dark:text-white hover:text-[#E1C5A0]" 
+    : "text-gray-700 dark:text-white hover:text-[#E1C5A0]"
 
   return (
     <Button 

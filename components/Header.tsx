@@ -100,7 +100,7 @@ const Header = () => {
         className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ease-out
           ${scrolled 
             ? isHomePage 
-              ? 'bg-[#01293C]/25 text-white backdrop-blur-xl border-b border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 shadow-2xl' 
+              ? 'bg-[#01293C]/25 backdrop-blur-xl border-b border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 shadow-2xl' 
               : 'bg-white backdrop-blur-xl text-white dark:bg-black/10 border-b border-[#E1C5A0]/20 dark:border-[#E1C5A0]/30 shadow-2xl'
             : 'bg-transparent'
           }`}
@@ -109,6 +109,8 @@ const Header = () => {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Three-column layout for centering logo */}
             <div className="flex flex-1 items-center justify-start min-w-0 ">
+
+              {/* Home Page Navigation */}
               {/* Desktop Navigation (left) */}
               {scrolled && !isMobile && (
                 <motion.nav 
@@ -130,11 +132,13 @@ const Header = () => {
                           <span className={`relative px-4 py-2 text-base font-medium transition-all duration-300 cursor-pointer group ${
                             item.isButton 
                               ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded hover:shadow-lg hover:scale-105' 
-                              : 'text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                              : isHomePage 
+                                ? 'text-white hover:text-[#E1C5A0]' 
+                                : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
                           }`}>
                             {item.label}
                             {!item.isButton && (
-                              <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                              <span className=" absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                             )}
                           </span>
                         </Link>
@@ -144,7 +148,9 @@ const Header = () => {
                           className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer group ${
                             item.isButton 
                               ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-lg shadow-md hover:shadow-lg hover:scale-105' 
-                              : 'text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                              : isHomePage 
+                                ? 'text-white hover:text-[#E1C5A0]' 
+                                : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
                           }`}
                         >
                           {item.label}
@@ -225,9 +231,9 @@ const Header = () => {
                   <DropdownMenu onOpenChange={setIsMenuOpen}>
                     <DropdownMenuTrigger className="flex items-center px-1.5 py-1 focus:outline-none hover:text-[#E1C5A0] transition-colors duration-300 ">
                       {isMenuOpen ? (
-                        <IoClose className="w-5 h-5 text-white dark:text-white transition-colors duration-300" />
+                        <IoClose className="w-5 h-5 text-gray-700 dark:text-white transition-colors duration-300" />
                       ) : (
-                        <CiMenuBurger className="w-5 h-5 text-white dark:text-white transition-colors duration-300" />
+                        <CiMenuBurger className="w-5 h-5 text-gray-700 dark:text-white transition-colors duration-300" />
                       )}
                     </DropdownMenuTrigger>
                     <DropdownMenuContent 
@@ -274,10 +280,10 @@ const Header = () => {
                      className="p-2 focus:outline-none hover:text-[#E1C5A0] transition-colors duration-300"
                    >
                      {isMenuOpen ? (
-                       <IoClose  className="w-8 h-8 lg:w-10 lg:h-10 text-gray-700 dark:text-gray-200 transition-colors duration-300" />
+                       <IoClose  className={`w-8 h-8 lg:w-10 lg:h-10 transition-colors duration-300 ${isHomePage ? 'text-white' : 'text-gray-700 dark:text-gray-200'}`} />
                      ) : (
                       
-                       <CiMenuBurger  className="w-6 h-6 lg:w-10 lg:h-10 text-[#E1C5A0] dark:text-gray-200 transition-colors duration-300 focus:outline-none" />
+                       <CiMenuBurger  className={`w-6 h-6 lg:w-10 lg:h-10 transition-colors duration-300 focus:outline-none ${isHomePage ? 'text-white' : 'text-[#E1C5A0] dark:text-gray-200'}`} />
                      )}
                    </button>
                  </motion.div>

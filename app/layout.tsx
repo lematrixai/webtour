@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
 import PageTransition from "@/components/PageTransition";
 import ConditionalHeader from "@/components/conditional-header";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const afacad = Afacad({
   variable: "--font-afacad",
@@ -50,6 +51,7 @@ export default function RootLayout({
               <ConditionalHeader />
               {children}
               <Footer/>
+              <WhatsAppButton />
             </PageTransition>
           </ThemeProvider>
       </body>
