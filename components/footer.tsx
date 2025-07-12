@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaPaperPlane, FaArrowUp } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaPaperPlane, FaArrowUp, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
   const [showTop, setShowTop] = useState(false);
@@ -19,72 +19,150 @@ const Footer = () => {
 
   return (
     <>
-      <footer id="footer" className="bg-[#E1C5A0] text-[#01293C] py-12 px-4 md:px-12 w-full border-t border-[#01293C]/20">
-        <div className="max-w-[90rem] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-[#01293C]/20">
-          {/* About */}
-          <div className="flex flex-col justify-center pb-8 md:pb-0 md:pr-12">
-            <h3 className="text-2xl font-semibold mb-4 text-[#01293C]">About</h3>
-            <p className="text-[#01293C]/80 text-lg mb-8 max-w-md">
-              Luxury Adventure Tours is dedicated to providing unparalleled luxury travel experiences. With a focus on minimalist yet extravagant adventures, we cater to the elite travelers seeking sophistication and exclusivity. Our commitment is to redefine luxury travel by offering unique and unforgettable journeys.
-            </p>
-            <form className="w-full max-w-xs">
-              <div className="flex items-center bg-white/50 backdrop-blur-sm rounded-sm overflow-hidden border border-[#01293C]/20">
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className="flex-1 px-4 py-3 bg-transparent text-[#01293C] placeholder-[#01293C]/60 outline-none"
-                />
-                <button type="submit" className="px-4 py-3 text-[#01293C] hover:text-[#E1C5A0] hover:bg-[#01293C] transition-colors">
-                  <FaPaperPlane size={20} />
-                </button>
+      <footer id="footer" className="bg-gradient-to-br from-[#E1C5A0] to-[#D4B890] text-[#01293C] relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%2301293C%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+        </div>
+
+        <div className="relative z-10">
+          {/* Main Footer Content */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            {/* Top Section - Company Info & Newsletter */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12">
+              {/* Company Info */}
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#01293C] mb-4">
+                    Luxury Adventure Tours
+                  </h2>
+                  <p className="text-[#01293C]/80 text-base sm:text-lg leading-relaxed max-w-lg">
+                    Experience the world's most exclusive destinations with our curated luxury travel experiences. 
+                    Where adventure meets sophistication.
+                  </p>
+                </div>
+                
+                {/* Social Links */}
+                <div className="flex space-x-4">
+                  <a href="#" className="bg-[#01293C] text-[#E1C5A0] p-3 rounded-full hover:bg-[#07384A] transition-all duration-300 hover:scale-110">
+                    <FaFacebook size={20} />
+                  </a>
+                  <a href="#" className="bg-[#01293C] text-[#E1C5A0] p-3 rounded-full hover:bg-[#07384A] transition-all duration-300 hover:scale-110">
+                    <FaTwitter size={20} />
+                  </a>
+                  <a href="#" className="bg-[#01293C] text-[#E1C5A0] p-3 rounded-full hover:bg-[#07384A] transition-all duration-300 hover:scale-110">
+                    <FaInstagram size={20} />
+                  </a>
+                </div>
               </div>
-            </form>
+
+              {/* Newsletter */}
+              <div className="backdrop-blur-sm rounded-2xl p-6 sm:p-8 ">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-[#01293C]">
+                  Stay Updated
+                </h3>
+                <p className="text-[#01293C]/70 mb-6 text-sm sm:text-base">
+                  Subscribe to our newsletter for exclusive offers and travel inspiration.
+                </p>
+                <form className="space-y-4">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="flex-1 px-4 py-3 bg-white/50 border border-[#01293C]/20 rounded-lg text-[#01293C] placeholder-[#01293C]/60 outline-none focus:ring-2 focus:ring-[#01293C]/30 transition-all"
+                    />
+                    <button 
+                      type="submit" 
+                      className="px-6 py-3 bg-[#01293C] text-[#E1C5A0] rounded-lg hover:bg-[#07384A] transition-all duration-300 flex items-center justify-center gap-2 font-medium"
+                    >
+                      <FaPaperPlane size={16} />
+                      <span className="hidden sm:inline">Subscribe</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {/* Middle Section - Quick Links & Contact */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+              {/* Quick Links */}
+              <div className="space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-[#01293C] border-b border-[#01293C]/20 pb-2">
+                  Quick Links
+                </h3>
+                <ul className="space-y-3">
+                  <li><a href="#" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors duration-200 text-sm sm:text-base">Services</a></li>
+                  <li><a href="#" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors duration-200 text-sm sm:text-base">Destinations</a></li>
+                  <li><a href="#" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors duration-200 text-sm sm:text-base">Testimonials</a></li>
+                  <li><a href="#" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors duration-200 text-sm sm:text-base">Book Now</a></li>
+                </ul>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-[#01293C] border-b border-[#01293C]/20 pb-2">
+                  Contact Us
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="bg-[#01293C] text-[#E1C5A0] p-2 rounded-lg flex-shrink-0">
+                      <FaMapMarkerAlt size={16} />
+                    </div>
+                    <div>
+                      <p className="text-[#01293C]/70 text-sm sm:text-base leading-relaxed">
+                        Dar es Salaam, Tanzania
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="bg-[#01293C] text-[#E1C5A0] p-2 rounded-lg flex-shrink-0">
+                      <FaPhoneAlt size={16} />
+                    </div>
+                    <a href="tel:+255778878787" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors text-sm sm:text-base">
+                      +255 778 878787
+                    </a>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="bg-[#01293C] text-[#E1C5A0] p-2 rounded-lg flex-shrink-0">
+                      <FaEnvelope size={16} />
+                    </div>
+                    <a href="mailto:booking@luxuryadventuretours.com" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors text-sm sm:text-base break-all">
+                      booking@luxuryadventuretours.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Links */}
-          <div className="flex flex-col items-start justify-center pt-8 md:pt-0 md:px-12">
-            <h3 className="text-2xl font-semibold mb-4 text-[#01293C]">Links</h3>
-            <ul className="space-y-4 text-[#01293C]/80 text-lg">
-              <li><a href="#" className="hover:text-[#01293C] transition-colors">Services</a></li>
-              <li><a href="#" className="hover:text-[#01293C] transition-colors">Routes</a></li>
-              <li><a href="#" className="hover:text-[#01293C] transition-colors">Testimonials</a></li>
-              <li><a href="#" className="hover:text-[#01293C] transition-colors">Reservation</a></li>
-            </ul>
-          </div>
-
-          {/* Contacts */}
-          <div className="flex flex-col justify-center pt-8 md:pt-0 md:pl-12">
-            <h3 className="text-2xl font-semibold mb-4 text-[#01293C]">Contacts</h3>
-            <ul className="space-y-6 text-[#01293C]/80 text-lg">
-              <li className="flex items-center gap-4">
-                <span className="bg-[#01293C] text-[#E1C5A0] rounded-full p-3 flex items-center justify-center"><FaMapMarkerAlt size={18} /></span>
-                <span>Dar es salaam,<br className="md:hidden" /> Tanzania</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="bg-[#01293C] text-[#E1C5A0] rounded-full p-3 flex items-center justify-center"><FaPhoneAlt size={18} /></span>
-                <span>+255 778 878787</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="bg-[#01293C] text-[#E1C5A0] rounded-full p-3 flex items-center justify-center"><FaEnvelope size={18} /></span>
-                <span>
-                  booking@luxuryad<br className="md:hidden" />venturetours.com
-                </span>
-              </li>
-            </ul>
+          {/* Bottom Section - Copyright */}
+          <div className="border-t border-[#01293C]/20 bg-[#01293C]/5">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p className="text-[#01293C]/70 text-sm sm:text-base text-center sm:text-left">
+                  &copy; 2025 Luxury Adventure Tours.
+                </p>
+                <div className="flex items-center gap-6 text-sm sm:text-base">
+                  <a href="#" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors">Terms</a>
+                  <a href="#" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors">Privacy</a>
+                  <a href="#" className="text-[#01293C]/70 hover:text-[#01293C] transition-colors">Cookies</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
-      <div className='flex justify-center items-center text-[#01293C] py-6 bg-[#E1C5A0]/80'>
-        <p>&copy; Copyright 2025 by Luxury Adventure Tours.</p>
-      </div>
+
       {/* Back to Top Button */}
       {showTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 bg-[#07384A] text-[#E1C5A0] p-3 rounded-full shadow-lg hover:bg-[#0B3B4F] transition-all duration-300 border-2 border-[#2B5A6B] animate-bounce hover:scale-110"
+          className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 z-50 bg-[#01293C] text-[#E1C5A0] p-3 sm:p-4 rounded-full shadow-xl hover:bg-[#07384A] transition-all duration-300 hover:scale-110 border-2 border-[#E1C5A0]/20"
           aria-label="Back to top"
         >
-          <FaArrowUp size={22} />
+          <FaArrowUp size={20} />
         </button>
       )}
     </>

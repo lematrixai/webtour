@@ -12,7 +12,7 @@ const images = [
 ]
 
 // Inline Skeleton component (in case the reusable one is not available)
-const Skeleton = ({ width = "100%", height = 200, rounded = "rounded-xl", className = "" }) => (
+const Skeleton = ({ width = "100%", height = 200, rounded = "rounded-xl", className = "" }: { width?: string | number, height?: string | number, rounded?: string, className?: string }) => (
   <div
     className={`bg-gray-300 dark:bg-gray-700 animate-pulse ${rounded} ${className}`}
     style={{ width, height }}
@@ -30,51 +30,52 @@ const ExploreGallery = () => {
   return (
     <section className="max-w-[90rem] mx-auto bg-[#01293C] max-md:py-16 py-26 px-4 w-full">
       <div className="flex flex-col gap-4">
-        {/* First row: 4 images */}
-        <div className="flex flex-wrap-reverse gap-4 justify-center">
+        {/* First row: 4 images - Maintained across all devices */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-6xl mx-auto">
           {loading
             ? Array.from({ length: 4 }).map((_, idx) => (
                 <div
                   key={"skeleton-1-" + idx}
-                  className="aspect-square w-full md:w-1/4 max-w-[300px] max-md:max-w-full flex-shrink-0 overflow-hidden px-4 md:px-0"
+                  className="aspect-square overflow-hidden rounded-xl"
                 >
-                  <Skeleton height={300} />
+                  <Skeleton height="100%" className="w-full h-full" />
                 </div>
               ))
             : images.slice(0, 4).map((src, idx) => (
                 <div
                   key={idx}
-                  className="aspect-square w-full md:w-1/4 max-w-[300px] max-md:max-w-full flex-shrink-0 overflow-hidden px-4 md:px-0"
+                  className="aspect-square overflow-hidden rounded-xl cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-black/20"
                 >
                   <img
                     src={src}
                     alt={`Gallery image ${idx + 1}`}
-                    className="w-full h-full object-cover block"
+                    className="w-full h-full object-cover block transition-transform duration-300 hover:scale-110"
                     loading="lazy"
                   />
                 </div>
               ))}
         </div>
-        {/* Second row: 3 images, centered */}
-        <div className="flex flex-wrap-reverse gap-4 justify-center">
+        
+        {/* Second row: 3 images, centered - Maintained across all devices */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
           {loading
             ? Array.from({ length: 3 }).map((_, idx) => (
                 <div
                   key={"skeleton-2-" + idx}
-                  className="aspect-square w-full md:w-1/4 max-md:max-w-full flex-shrink-0 overflow-hidden px-4 md:px-0"
+                  className="aspect-square overflow-hidden rounded-xl"
                 >
-                  <Skeleton height={300} />
+                  <Skeleton height="100%" className="w-full h-full" />
                 </div>
               ))
             : images.slice(4, 7).map((src, idx) => (
                 <div
                   key={idx}
-                  className="aspect-square w-full md:w-1/4 max-md:max-w-full flex-shrink-0 overflow-hidden px-4 md:px-0"
+                  className="aspect-square overflow-hidden rounded-xl cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-black/20"
                 >
                   <img
                     src={src}
                     alt={`Gallery image ${idx + 5}`}
-                    className="w-full h-full object-cover block"
+                    className="w-full h-full object-cover block transition-transform duration-300 hover:scale-110"
                     loading="lazy"
                   />
                 </div>
