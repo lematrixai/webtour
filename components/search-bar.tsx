@@ -288,7 +288,7 @@ const SearchBar = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center mb-8"
             >
-              <h2 className="text-3xl text-ephesis lg:text-4xl font-bold text-[#01293C] mb-2">
+              <h2 className="text-3xl text-sacramento lg:text-4xl font-bold text-[#01293C] mb-2">
                 Find Your Perfect Adventure
               </h2>
               <p className="text-[#01293C]/80 text-dancing_script text-lg">

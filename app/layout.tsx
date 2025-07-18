@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Afacad, Ephesis,Dancing_Script } from "next/font/google";
+import { Afacad, Ephesis,Dancing_Script, Great_Vibes, Sacramento} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
@@ -25,6 +25,18 @@ const dancing_script = Dancing_Script({
   weight: ["400", "500", "600", "700"],
 });
 
+const great_vibes = Great_Vibes({
+  variable: "--font-great_vibes",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
+const sacramento = Sacramento({
+  variable: "--font-sacramento",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   title: "Luxury adventure tour",
   description: "Luxury adventure tour website for travel agency ",
@@ -39,7 +51,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={`${afacad.variable} ${ephesis.variable} ${dancing_script.variable} font-afacad antialiased`}
+        className={`${afacad.variable} ${ephesis.variable} ${dancing_script.variable} ${great_vibes.variable} ${sacramento.variable}  font-afacad antialiased`}
       >
           <ThemeProvider
             attribute="class"
