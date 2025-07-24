@@ -141,9 +141,9 @@ const TourDetail = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-black dark:via-gray-900 dark:to-black">
       {/* Navigation Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/20 backdrop-blur-md border-b border-slate-200/50 dark:border-white/10">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/20 backdrop-blur-md border-b border-slate-200/50 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <Link href="/destinations" className="flex items-center gap-2 text-slate-700 dark:text-white hover:text-[#E1C5A0] transition-colors">
@@ -157,12 +157,12 @@ const TourDetail = () => {
                 className={`p-2 rounded-full transition-all duration-300 ${
                   isFavorite 
                     ? 'bg-red-500 text-white' 
-                    : 'bg-slate-200/50 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-300/50 dark:hover:bg-white/20'
+                    : 'bg-slate-200/50 dark:bg-gray-800 text-slate-700 dark:text-white hover:bg-slate-300/50 dark:hover:bg-gray-700'
                 }`}
               >
                 <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
               </button>
-              <button className="p-2 rounded-full bg-slate-200/50 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-300/50 dark:hover:bg-white/20 transition-all duration-300">
+              <button className="p-2 rounded-full bg-slate-200/50 dark:bg-gray-800 text-slate-700 dark:text-white hover:bg-slate-300/50 dark:hover:bg-gray-700 transition-all duration-300">
                 <Share2 className="w-5 h-5" />
               </button>
             </div>
@@ -213,7 +213,7 @@ const TourDetail = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      <div className="relative z-10 bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-black dark:via-gray-900 dark:to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main Content */}
@@ -242,28 +242,28 @@ const TourDetail = () => {
 
                 {/* Quick Info */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-white/10">
+                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-gray-800 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-gray-700">
                     <Clock className="w-6 h-6 text-[#E1C5A0]" />
                     <div>
                       <p className="text-sm text-slate-600 dark:text-[#E1C5A0]/60">Duration</p>
                       <p className="font-medium text-slate-800 dark:text-white">{destinationData.duration}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-white/10">
+                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-gray-800 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-gray-700">
                     <Users className="w-6 h-6 text-[#E1C5A0]" />
                     <div>
                       <p className="text-sm text-slate-600 dark:text-[#E1C5A0]/60">Group Size</p>
                       <p className="font-medium text-slate-800 dark:text-white">{destinationData.groupSize}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-white/10">
+                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-gray-800 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-gray-700">
                     <Calendar className="w-6 h-6 text-[#E1C5A0]" />
                     <div>
                       <p className="text-sm text-slate-600 dark:text-[#E1C5A0]/60">Dates</p>
                       <p className="font-medium text-slate-800 dark:text-white">Flexible</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-white/10">
+                  <div className="flex items-center gap-3 text-slate-700 dark:text-[#E1C5A0]/90 bg-white/50 dark:bg-gray-800 backdrop-blur-sm rounded-lg p-4 border border-slate-200/50 dark:border-gray-700">
                     <Award className="w-6 h-6 text-[#E1C5A0]" />
                     <div>
                       <p className="text-sm text-slate-600 dark:text-[#E1C5A0]/60">Rating</p>
@@ -279,7 +279,7 @@ const TourDetail = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Card className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+                <Card className="bg-white/70 dark:bg-gray-800 backdrop-blur-sm border-slate-200/50 dark:border-gray-700 shadow-xl">
                   <CardHeader>
                     <CardTitle className="text-[#E1C5A0] font-serif text-2xl">About This Tour</CardTitle>
                   </CardHeader>
@@ -297,7 +297,7 @@ const TourDetail = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <Card className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+                <Card className="bg-white/70 dark:bg-gray-800 backdrop-blur-sm border-slate-200/50 dark:border-gray-700 shadow-xl">
                   <CardHeader>
                     <CardTitle className="text-[#E1C5A0] font-serif text-2xl">Highlights</CardTitle>
                   </CardHeader>
@@ -326,7 +326,7 @@ const TourDetail = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <Card className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+                <Card className="bg-white/70 dark:bg-gray-800 backdrop-blur-sm border-slate-200/50 dark:border-gray-700 shadow-xl">
                   <CardHeader>
                     <CardTitle className="text-[#E1C5A0] font-serif text-2xl">Itinerary</CardTitle>
                   </CardHeader>
@@ -371,7 +371,7 @@ const TourDetail = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                <Card className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+                <Card className="bg-white/70 dark:bg-gray-800 backdrop-blur-sm border-slate-200/50 dark:border-gray-700 shadow-xl">
                   <CardHeader>
                     <CardTitle className="text-green-400 font-serif text-xl">What's Included</CardTitle>
                   </CardHeader>
@@ -387,7 +387,7 @@ const TourDetail = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+                <Card className="bg-white/70 dark:bg-gray-800 backdrop-blur-sm border-slate-200/50 dark:border-gray-700 shadow-xl">
                   <CardHeader>
                     <CardTitle className="text-red-400 font-serif text-xl">Not Included</CardTitle>
                   </CardHeader>
@@ -412,7 +412,7 @@ const TourDetail = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                <Card className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+                <Card className="bg-white/70 dark:bg-gray-800 backdrop-blur-sm border-slate-200/50 dark:border-gray-700 shadow-xl">
                   <CardHeader>
                     <CardTitle className="text-[#E1C5A0] font-serif text-2xl">Reviews</CardTitle>
                   </CardHeader>
@@ -421,7 +421,7 @@ const TourDetail = () => {
                       {destinationData.reviews.map((review, index) => (
                         <motion.div 
                           key={review.id} 
-                          className="border-b border-slate-200/50 dark:border-white/10 pb-6 last:border-b-0"
+                          className="border-b border-slate-200/50 dark:border-gray-700 pb-6 last:border-b-0"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
@@ -458,7 +458,7 @@ const TourDetail = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                  <Card className="border-slate-200/50 dark:border-white/20 bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm shadow-xl">
+                  <Card className="border-slate-200/50 dark:border-gray-700 bg-white/70 dark:bg-gray-800 backdrop-blur-sm shadow-xl">
                     <CardHeader>
                       <CardTitle className="text-[#E1C5A0] font-serif text-2xl">Book This Tour</CardTitle>
                       <div className="text-3xl font-bold text-slate-800 dark:text-white">{destinationData.price}</div>
@@ -472,7 +472,7 @@ const TourDetail = () => {
                         <select
                           value={selectedDate}
                           onChange={(e) => setSelectedDate(e.target.value)}
-                          className="w-full h-12 px-4 bg-white/50 dark:bg-slate-700/50 border border-slate-200/50 dark:border-slate-600/50 rounded-lg focus:border-[#E1C5A0] focus:outline-none text-slate-800 dark:text-white placeholder:text-slate-500 dark:placeholder:text-white/60 backdrop-blur-sm"
+                          className="w-full h-12 px-4 bg-white/50 dark:bg-gray-700 border border-slate-200/50 dark:border-gray-600 rounded-lg focus:border-[#E1C5A0] focus:outline-none text-slate-800 dark:text-white placeholder:text-slate-500 dark:placeholder:text-white/60 backdrop-blur-sm"
                         >
                           <option value="">Choose a date</option>
                           {destinationData.availability.map((date) => (
@@ -480,7 +480,7 @@ const TourDetail = () => {
                               key={date.date} 
                               value={date.date}
                               disabled={!date.available}
-                              className="bg-white dark:bg-slate-800 text-slate-800 dark:text-white"
+                              className="bg-white dark:bg-gray-800 text-slate-800 dark:text-white"
                             >
                               {new Date(date.date).toLocaleDateString('en-GB')} 
                               {!date.available && ' (Full)'}
@@ -494,12 +494,12 @@ const TourDetail = () => {
                         <label className="block text-sm font-medium text-[#E1C5A0] mb-3">
                           Number of Guests
                         </label>
-                        <div className="flex items-center border border-slate-200/50 dark:border-slate-600/50 rounded-lg bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm">
+                        <div className="flex items-center border border-slate-200/50 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700 backdrop-blur-sm">
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => setGuests(Math.max(1, guests - 1))}
-                            className="h-12 w-12 text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-white/10"
+                            className="h-12 w-12 text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-gray-600"
                           >
                             -
                           </Button>
@@ -508,7 +508,7 @@ const TourDetail = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => setGuests(guests + 1)}
-                            className="h-12 w-12 text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-white/10"
+                            className="h-12 w-12 text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-gray-600"
                           >
                             +
                           </Button>
@@ -525,7 +525,7 @@ const TourDetail = () => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email"
-                          className="w-full h-12 px-4 bg-white/50 dark:bg-slate-700/50 border border-slate-200/50 dark:border-slate-600/50 rounded-lg focus:border-[#E1C5A0] focus:outline-none text-slate-800 dark:text-white placeholder:text-slate-500 dark:placeholder:text-white/60 backdrop-blur-sm"
+                          className="w-full h-12 px-4 bg-white/50 dark:bg-gray-700 border border-slate-200/50 dark:border-gray-600 rounded-lg focus:border-[#E1C5A0] focus:outline-none text-slate-800 dark:text-white placeholder:text-slate-500 dark:placeholder:text-white/60 backdrop-blur-sm"
                         />
                       </div>
 
@@ -540,13 +540,13 @@ const TourDetail = () => {
                       <div className="text-center text-sm text-slate-600 dark:text-white/70">
                         <p className="mb-3">Questions? Contact us</p>
                         <div className="flex items-center justify-center gap-4">
-                          <Button variant="ghost" size="sm" className="text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-white/10 rounded-full">
+                          <Button variant="ghost" size="sm" className="text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-gray-600 rounded-full">
                             <Phone className="w-5 h-5" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-white/10 rounded-full">
+                          <Button variant="ghost" size="sm" className="text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-gray-600 rounded-full">
                             <Mail className="w-5 h-5" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-white/10 rounded-full">
+                          <Button variant="ghost" size="sm" className="text-slate-700 dark:text-white hover:bg-slate-200/50 dark:hover:bg-gray-600 rounded-full">
                             <Globe className="w-5 h-5" />
                           </Button>
                         </div>
@@ -561,7 +561,7 @@ const TourDetail = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  <Card className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+                  <Card className="bg-white/70 dark:bg-gray-800 backdrop-blur-sm border-slate-200/50 dark:border-gray-700 shadow-xl">
                     <CardContent className="pt-6">
                       <div className="flex items-center gap-3 mb-4">
                         <Shield className="w-7 h-7 text-green-400" />

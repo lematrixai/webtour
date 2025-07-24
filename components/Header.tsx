@@ -14,6 +14,7 @@ import {
 import { scroller } from 'react-scroll';
 import { useEffect, useState } from 'react';
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import { 
   Home,
   Plane,
@@ -37,6 +38,7 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHomePage, setIsHomePage] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     // Check if we're on the home page
@@ -91,6 +93,14 @@ const Header = () => {
 
   const bookNowItem = { label: 'Book Now', href: '/book-now', isButton: true, icon: <Calendar className="w-5 h-5" /> };
 
+  // Check if a navigation item is active
+  const isActive = (href?: string) => {
+    if (!href) return false;
+    if (href === '/' && pathname === '/') return true;
+    if (href !== '/' && pathname.startsWith(href)) return true;
+    return false;
+  };
+
   return (
     <>
       <motion.header
@@ -119,51 +129,58 @@ const Header = () => {
                   transition={{ duration: 0.6, staggerChildren: 0.1 }}
                   className="hidden lg:flex items-center space-x-1 "
                 >
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.label}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="relative group"
-                    >
-                      {item.href ? (
-                        <Link href={item.href}>
-                          <span className={`relative px-4 py-2 text-base font-medium transition-all duration-300 cursor-pointer group ${
-                            item.isButton 
-                              ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded hover:shadow-lg hover:scale-105' 
-                              : isHomePage 
-                                ? 'text-white hover:text-[#E1C5A0]' 
-                                : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
-                          }`}>
+                  {navItems.map((item, index) => {
+                    const active = isActive(item.href);
+                    return (
+                      <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="relative group"
+                      >
+                        {item.href ? (
+                          <Link href={item.href}>
+                            <span className={`relative px-4 py-2 text-base font-medium transition-all duration-300 cursor-pointer group ${
+                              item.isButton 
+                                ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded hover:shadow-lg hover:scale-105' 
+                                : active
+                                  ? isHomePage 
+                                    ? 'text-[#E1C5A0] font-semibold' 
+                                    : 'text-[#E1C5A0] font-semibold'
+                                  : isHomePage 
+                                    ? 'text-white hover:text-[#E1C5A0]' 
+                                    : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                            }`}>
+                              {item.label}
+                              {!item.isButton && (
+                                <span className={`absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg transition-opacity duration-300 ${
+                                  active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                                }`}></span>
+                              )}
+                            </span>
+                          </Link>
+                        ) : (
+                          <button 
+                            onClick={item.action}
+                            className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer group ${
+                              item.isButton 
+                                ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-lg shadow-md hover:shadow-lg hover:scale-105' 
+                                : isHomePage 
+                                  ? 'text-white hover:text-[#E1C5A0]' 
+                                  : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
+                            }`}
+                          >
                             {item.label}
                             {!item.isButton && (
-                              <span className=" absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                              <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                             )}
-                          </span>
-                        </Link>
-                      ) : (
-                        <button 
-                          onClick={item.action}
-                          className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 cursor-pointer group ${
-                            item.isButton 
-                              ? 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] rounded-lg shadow-md hover:shadow-lg hover:scale-105' 
-                              : isHomePage 
-                                ? 'text-white hover:text-[#E1C5A0]' 
-                                : 'text-gray-700 dark:text-white hover:text-[#18130C] dark:hover:text-[#E1C5A0]'
-                          }`}
-                        >
-                          {item.label}
-                          {!item.isButton && (
-                            <span className="absolute inset-0 bg-gradient-to-r from-[#E1C5A0]/10 to-[#E1C5A0]/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                          )}
-                        </button>
-                      )}
-                      {!item.isButton && (
-                        <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/60 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
-                      )}
-                    </motion.div>
-                  ))}
+                          </button>
+                        )}
+
+                      </motion.div>
+                    );
+                  })}
                 </motion.nav>
               )}
             </div>
@@ -221,7 +238,11 @@ const Header = () => {
                 className="hidden lg:block"
               >
                 <Link href={bookNowItem.href!}>
-                  <button className="bg-gradient-to-r mr-1 from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0] px-6 py-2 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium">
+                  <button className={`bg-gradient-to-r mr-1 px-6 py-2 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium ${
+                    isActive(bookNowItem.href)
+                      ? 'from-[#E1C5A0] to-[#E1C5A0] text-[#18130C] shadow-lg'
+                      : 'from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:from-[#E1C5A0]/90 hover:to-[#E1C5A0]'
+                  }`}>
                     {bookNowItem.label}
                   </button>
                 </Link>
@@ -240,27 +261,28 @@ const Header = () => {
                       className="bg-white/10 dark:bg-black/10 backdrop-blur-xl border border-[#E1C5A0]/20 dark:border-[#E1C5A0]/40 shadow-2xl rounded-2xl p-2 min-w-[200px] mt-2"
                       align="end"
                     >
-                      {webNavItems.map((item, index) => (
-                                                  <Link key={item.label} href={item.href!}>
-
-                        <DropdownMenuItem 
-                          key={item.label}
-                          className={`text-base font-medium transition-all duration-300 cursor-pointer p-3 ${
-                            item.isButton 
-                              ? 'bg-white from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:bg-[#E1C5A0] rounded-xl ' 
-                              : 'text-gray-100 dark:text-gray-200 hover:text-[#E1C5A0] rounded-xl'
-                          }`}
-                          onClick={item.action}
-                        >
-                            <div className="flex items-center space-x-2">
-                              {item.icon && <span className="text-[#E1C5A0]">{item.icon}</span>}
-                              <span>{item.label}</span>
-                            </div>
-                         
-                        </DropdownMenuItem>
-                        </Link>
-
-                      ))}
+                      {webNavItems.map((item, index) => {
+                        const active = isActive(item.href);
+                        return (
+                          <Link key={item.label} href={item.href!}>
+                            <DropdownMenuItem 
+                              className={`text-base font-medium transition-all duration-300 cursor-pointer p-3 ${
+                                item.isButton 
+                                  ? 'bg-white from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] hover:bg-[#E1C5A0] rounded-xl ' 
+                                  : active
+                                    ? 'text-[#E1C5A0] bg-[#E1C5A0]/10 rounded-xl'
+                                    : 'text-gray-100 dark:text-gray-200 hover:text-[#E1C5A0] rounded-xl'
+                              }`}
+                              onClick={item.action}
+                            >
+                              <div className="flex items-center space-x-2">
+                                {item.icon && <span className={`${active ? 'text-[#E1C5A0]' : 'text-[#E1C5A0]'}`}>{item.icon}</span>}
+                                <span>{item.label}</span>
+                              </div>
+                            </DropdownMenuItem>
+                          </Link>
+                        );
+                      })}
                      
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -344,35 +366,42 @@ const Header = () => {
 
             {/* Mobile Menu Items */}
             <div className="flex flex-col p-6 space-y-4">
-              {navItems.map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="w-full"
-                >
-                  {item.href ? (
-                    <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
-                      <div className="w-full p-4 text-lg font-medium text-[#18130C] dark:text-white hover:bg-[#E1C5A0]/10 transition-all duration-300 border-b border-[#E1C5A0]/10 flex items-center space-x-3">
+              {navItems.map((item, index) => {
+                const active = isActive(item.href);
+                return (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="w-full"
+                  >
+                    {item.href ? (
+                      <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
+                        <div className={`w-full p-4 text-lg font-medium transition-all duration-300 border-b border-[#E1C5A0]/10 flex items-center space-x-3 ${
+                          active
+                            ? 'text-[#E1C5A0] bg-[#E1C5A0]/10 font-semibold'
+                            : 'text-[#18130C] dark:text-white hover:bg-[#E1C5A0]/10'
+                        }`}>
+                          {item.icon && <span className={`${active ? 'text-[#E1C5A0]' : 'text-[#E1C5A0]'}`}>{item.icon}</span>}
+                          <span>{item.label}</span>
+                        </div>
+                      </Link>
+                    ) : (
+                      <button 
+                        onClick={() => {
+                          item.action?.();
+                          setIsMenuOpen(false);
+                        }}
+                        className="w-full p-4 text-lg font-medium text-[#18130C] dark:text-white hover:bg-[#E1C5A0]/10 transition-all duration-300 border-b border-[#E1C5A0]/10 text-left flex items-center space-x-3"
+                      >
                         {item.icon && <span className="text-[#E1C5A0]">{item.icon}</span>}
                         <span>{item.label}</span>
-                      </div>
-                    </Link>
-                  ) : (
-                    <button 
-                      onClick={() => {
-                        item.action?.();
-                        setIsMenuOpen(false);
-                      }}
-                      className="w-full p-4 text-lg font-medium text-[#18130C] dark:text-white hover:bg-[#E1C5A0]/10 transition-all duration-300 border-b border-[#E1C5A0]/10 text-left flex items-center space-x-3"
-                    >
-                      {item.icon && <span className="text-[#E1C5A0]">{item.icon}</span>}
-                      <span>{item.label}</span>
-                    </button>
-                  )}
-                </motion.div>
-              ))}
+                      </button>
+                    )}
+                  </motion.div>
+                );
+              })}
               
               {/* Book Now Button */}
               <motion.div
@@ -382,7 +411,11 @@ const Header = () => {
                 className="w-full pt-4"
               >
                 <Link href={bookNowItem.href!} onClick={() => setIsMenuOpen(false)}>
-                  <div className="w-full p-4 bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C] font-medium text-lg text-center rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-3">
+                  <div className={`w-full p-4 font-medium text-lg text-center rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-3 ${
+                    isActive(bookNowItem.href)
+                      ? 'bg-[#E1C5A0] text-[#18130C] shadow-xl'
+                      : 'bg-gradient-to-r from-[#E1C5A0] to-[#E1C5A0]/80 text-[#18130C]'
+                  }`}>
                     {bookNowItem.icon && <span>{bookNowItem.icon}</span>}
                     <span>{bookNowItem.label}</span>
                   </div>
